@@ -6,5 +6,5 @@ void main() {
   runApp(const GetMaterialApp(
     debugShowCheckedModeBanner: false,
     home: SplashScreen(),
-  ));
+  ),);
 }

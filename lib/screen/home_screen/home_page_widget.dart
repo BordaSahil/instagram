@@ -44,14 +44,14 @@ Widget homePageBody() {
         Expanded(
           child: Container(
             width: double.infinity,
-            child: Swiper(
+           /* child: Swiper(
               itemCount: 5,
               autoplay: false,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return swiperList;
               },
-            ),
+            ),*/
           ),
         ),
       ],

@@ -12,6 +12,7 @@ class StringRes {
   static const changeItLater = " You can always change it later";
   static const userName = "UserName";
   static const next = "Next";
+  static const from = "from";
   static const createPassword = "Create a password";
   static const securiry =
       "For securiry,your password must be 6 characters or more.";
