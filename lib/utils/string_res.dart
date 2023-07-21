@@ -20,7 +20,7 @@ class StringRes {
   //-------------------post ---------------------//
   static const sudhir = "sudhirborda";
   static const sudhirSub = "surat,gujarat";
-  static const vishal = "vishal";
+  static const vishal = "vishalsavaliya";
   static const vishalSub = "saputara,gujrat";
   static const sahil = "sahil";
   static const roshan = "roshanpaladiya";
@@ -28,7 +28,8 @@ class StringRes {
   static const akshayBhai = "akshay";
 
   //----------------------discreption -------------------------///
-  static const readMoreText = 'Liked by anniiee___ and 47 others Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.\n Happy International Chess Day \n #internationalChessday \n #MindGames \n #CheackMate \n #adobe\n #uix \n #uxd \n #dribble \n #roshan \n #sahil ';
+  static const readMoreText =
+      'Liked by anniiee___ and 47 others Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.\n Happy International Chess Day \n #internationalChessday \n #MindGames \n #CheackMate \n #adobe\n #uix \n #uxd \n #dribble \n #roshan \n #sahil ';
   static const commentstext = 'View all 132 comments';
   static const timeText = '3 day ago';
 }

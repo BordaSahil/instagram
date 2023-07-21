@@ -1,6 +1,6 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:instagram/common/common_size_box.dart';
 import 'package:instagram/screen/home_screen/home_controller.dart';
 import 'package:instagram/utils/asset_res.dart';
@@ -8,83 +8,78 @@ import 'package:instagram/utils/color_res.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:readmore/readmore.dart';
 
-/*Widget homePageBody() {
-  return CustomScrollView(
-    slivers: [
-      SliverAppBar(
-        leading: const SizedBox(),
-        actions: [
-          const Icon(Icons.favorite_border_outlined,
-              color: ColorsRes.black, size: 30),
-          Image.asset(AssetRes.massege, scale: 10),
-          const SizedBox(width: 10)
-        ],
-        snap: false,
-        pinned: false,
-        floating: false,
-        elevation: 0,
-        backgroundColor: ColorsRes.white,
-        flexibleSpace: FlexibleSpaceBar(
-          titlePadding: const EdgeInsets.only(left: 8),
-          title: Image.asset(AssetRes.instagramText, scale: 3.5),
-        ),
-      ),
-      SliverFillRemaining(
-        child:
-      ),
+AppBar homePageAppBar() {
+  return AppBar(
+    backgroundColor: ColorsRes.white,
+    elevation: 0,
+    title: Image.asset(AssetRes.instagramColorText, scale: 3),
+    actions: [
+      Image.asset(AssetRes.massege, scale: 6),
+      const SizedBox(width: 5)
     ],
   );
-}*/
+}
 
 Widget homePageBody() {
-  return SafeArea(
+  return SingleChildScrollView(
     child: Column(
       children: [
         story(),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-           /* child: Swiper(
-              itemCount: 5,
-              autoplay: false,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return swiperList;
-              },
-            ),*/
-          ),
-        ),
+        post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
+        Image.asset(AssetRes.roshan),
+        roshanRow(),
+        readMoreRow(),
+        commentText(),
+        post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
+        multiImage(),
+        vishalRow(),
+        readMoreRow(),
+        commentText(),
       ],
     ),
   );
 }
 
-List swiperList = [
-  singleImage(),
-  multiImage(),
-];
-
-Widget singleImage() {
-  return Column(
-    children: [
-      post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
-      Image.asset(AssetRes.roshan),
-      roshanRow(),
-      readMoreRow(),
-      commentText(),
-    ],
-  );
-}
-
 Widget multiImage() {
-  return Column(
-    children: [
-      post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
-      Image.asset(AssetRes.vishal),
-      vishalRow(),
-      readMoreRow(),
-      commentText(),
-    ],
+  return SizedBox(
+    width: Get.width,
+    height: Get.height * 0.6,
+    child: Stack(
+      children: [
+        GetBuilder<HomeController>(
+          id: "pageView",
+          builder: (controller) {
+            return PageView(
+              allowImplicitScrolling: true,
+              scrollDirection: Axis.horizontal,
+              onPageChanged: controller.onPageChange,
+              children: AssetRes.listImage.map((e) {
+                return InstaImageViewer(
+                  child: Image(
+                    width: Get.width,
+                    repeat: ImageRepeat.noRepeat,
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.contain,
+                    image: Image.asset(e).image,
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
+        const Positioned(
+          right: 20,
+          top: 5,
+          child: Icon(
+            Icons.file_copy_outlined,
+            size: 30,
+            color: ColorsRes.black,
+          ),
+        ),
+        const Positioned(
+            bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
+      ],
+    ),
   );
 }
 
@@ -92,7 +87,7 @@ Widget post(String image, String title, String subTitle) {
   return Column(
     children: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -172,16 +167,22 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
         builder: (controller) {
           return GestureDetector(
             onTap: () => controller.openBottomSheet(),
-            child: Image.asset(AssetRes.comment, scale: 20),
+            child: Image.asset(
+              AssetRes.comment,
+              scale: 8,
+            ),
           );
         },
       ),
-      const SizedBox(width: 8),
       GetBuilder<HomeController>(
         builder: (controller) {
           return GestureDetector(
-              onTap: () => controller.openBottomSheetHome(),
-              child: Image.asset(AssetRes.send, scale: 17));
+            onTap: () => controller.openBottomSheetHome(),
+            child: Image.asset(
+              AssetRes.send,
+              scale: 5,
+            ),
+          );
         },
       ),
       const Spacer(),
@@ -198,7 +199,6 @@ Widget readMoreRow() {
     padding: EdgeInsets.all(13.0),
     child: ReadMoreText(
       StringRes.readMoreText,
-      preDataText: "dosm,cmv ssgbbfh",
       trimLines: 2,
       colorClickableText: Colors.pink,
       trimMode: TrimMode.Line,
@@ -243,44 +243,41 @@ Widget commentText() {
 }
 
 Widget story() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: SizedBox(
-        height: 120,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: AssetRes.listImage.length,
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(3),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(colors: ColorsRes.colorList),
-                        shape: BoxShape.circle),
-                    child: Padding(
-                      padding: const EdgeInsets.all(2),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3),
-                          child: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(AssetRes.listImage[index]),
-                              radius: 35),
-                        ),
+  return SizedBox(
+      height: 120,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: AssetRes.listImage.length,
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(3),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: ColorsRes.colorList),
+                      shape: BoxShape.circle),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3),
+                        child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage(AssetRes.listImage[index]),
+                            radius: 35),
                       ),
                     ),
                   ),
                 ),
-                Text(AssetRes.storyName[index])
-              ],
-            );
-          },
-        )),
-  );
+              ),
+              Text(AssetRes.storyName[index])
+            ],
+          );
+        },
+      ));
 }

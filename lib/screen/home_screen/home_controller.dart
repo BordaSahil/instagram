@@ -7,6 +7,14 @@ class HomeController extends GetxController {
   bool book = false;
   bool vBook = false;
   late final PageController pageController;
+  int selectedIndex = 0;
+
+  void onPageChange(int? index) {
+    selectedIndex = index!;
+    print(index);
+    update(["pag;eView"]);
+  }
+
   //-----------------like***************
   void redHart() {
     hart = !hart;
