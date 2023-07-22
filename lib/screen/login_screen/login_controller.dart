@@ -31,13 +31,25 @@ class LoginController extends GetxController {
     update(["phoneUser"]);
   }
 
+  String? passwordError;
+  void loginPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      passwordError = "Please Enter Password";
+    } else if (!(value.length > 8)) {
+      passwordError = "Enter password must be 8 character";
+    } else {
+      passwordError = null;
+    }
+    update(["passwordValid"]);
+  }
+
   void onChangeButton(String? newValue) {
     dropdownValue = newValue!;
     update(["dropdown"]);
   }
 
   void goToHomeScreen() {
-    update(["phoneUser"]);
+    update(["phoneUser","passwordValid"]);
     Get.off(() => const DashboardPage());
   }
 

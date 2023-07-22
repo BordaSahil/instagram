@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 
 class HomeController extends GetxController {
   bool hart = false;
   bool vHart = false;
   bool book = false;
   bool vBook = false;
+
+  @override
+  void onInit() {
+    controller = VideoPlayerController.networkUrl(Uri.parse(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),)
+    ..initialize().then((_) {
+    });
+    super
+    .
+    onInit
+    (
+    );
+  }
+
   late final PageController pageController;
+  late VideoPlayerController controller;
   int selectedIndex = 0;
 
   void onPageChange(int? index) {

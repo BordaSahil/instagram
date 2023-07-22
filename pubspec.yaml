@@ -42,9 +42,9 @@ dependencies:
   insta_image_viewer: ^1.0.2
   lottie:
   animated_text_kit: ^4.2.2
-  reels_viewer:
   flashy_tab_bar2: 0.0.6
   simple_gradient_text: 1.2.4
+  video_player: ^2.7.0
 
 dev_dependencies:
   flutter_test:

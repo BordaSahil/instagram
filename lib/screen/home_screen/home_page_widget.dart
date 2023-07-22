@@ -7,6 +7,7 @@ import 'package:instagram/utils/asset_res.dart';
 import 'package:instagram/utils/color_res.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:readmore/readmore.dart';
+import 'package:video_player/video_player.dart';
 
 AppBar homePageAppBar() {
   return AppBar(
@@ -23,7 +24,8 @@ Widget homePageBody() {
       children: [
         story(),
         post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
-        Image.asset(AssetRes.roshan),
+        // Image.asset(AssetRes.roshan),
+        roshan(),
         roshanRow(),
         readMoreRow(),
         commentText(),
@@ -34,6 +36,21 @@ Widget homePageBody() {
         commentText(),
       ],
     ),
+  );
+}
+
+Widget roshan(){
+  return GetBuilder<HomeController>(
+      builder:(controller) => SizedBox(
+        height: 300,
+        width: Get.width,
+        child: controller.controller.value.isInitialized
+            ? AspectRatio(
+          aspectRatio: controller.controller.value.aspectRatio,
+          child: VideoPlayer(controller.controller),
+        )
+            : Container(),
+      ),
   );
 }
 

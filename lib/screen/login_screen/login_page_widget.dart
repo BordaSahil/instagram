@@ -8,47 +8,49 @@ import 'package:instagram/utils/asset_res.dart';
 import 'package:instagram/utils/string_res.dart';
 
 Widget loginScreenBody() {
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.only(
-            left: Get.width * 0.060,
-            right: Get.width * 0.060,
-            top: Get.height * 0.05),
-        child: Column(
-          children: [
-            dropdownButton(),
-            verticalSizeBox(Get.height * 0.15),
-            SizedBox(
-                height: Get.height * 0.060,
-                child: Image.asset(AssetRes.instagramText)),
-            verticalSizeBox(Get.height * 0.040),
-            userNameTextField(),
-            verticalSizeBox(Get.height * 0.020),
-            passwordTextField(),
-            verticalSizeBox(Get.height * 0.025),
-            submitButton(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  StringRes.forgot,
-                  style: TextStyle(fontSize: 12),
-                ),
-                getHelp()
-              ],
-            ),
-            dividerRow(),
-            verticalSizeBox(Get.height * 0.018),
-            fbButton(),
-          ],
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: Get.width * 0.060,
+              right: Get.width * 0.060,
+              top: Get.height * 0.05),
+          child: Column(
+            children: [
+              dropdownButton(),
+              verticalSizeBox(Get.height * 0.15),
+              SizedBox(
+                  height: Get.height * 0.060,
+                  child: Image.asset(AssetRes.instagramText)),
+              verticalSizeBox(Get.height * 0.040),
+              userNameTextField(),
+              verticalSizeBox(Get.height * 0.015),
+              passwordTextField(),
+              verticalSizeBox(Get.height * 0.025),
+              submitButton(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    StringRes.forgot,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  getHelp(),
+                ],
+              ),
+              dividerRow(),
+              verticalSizeBox(Get.height * 0.018),
+              fbButton(),
+            ],
+          ),
         ),
-      ),
-      verticalSizeBox(Get.height * 0.15),
-      const Expanded(child: Divider(thickness: 0.7, color: Colors.grey)),
-      signupRow(),
-      verticalSizeBox(10)
-    ],
+        verticalSizeBox(Get.height * 0.15),
+        const Divider(thickness: 0.7, color: Colors.grey),
+        signupRow(),
+        verticalSizeBox(10)
+      ],
+    ),
   );
 }
 
@@ -63,7 +65,7 @@ Widget userNameTextField() {
               controller: controller.userName,
               text: StringRes.phoneEmailUserName,
               onChanged: (value) => controller.loginPhoneUser(value)),
-          verticalSizeBox(Get.height * 0.010),
+          verticalSizeBox(Get.height * 0.0050),
           controller.phoneUserError == null
               ? const SizedBox()
               : Text(
@@ -78,13 +80,18 @@ Widget userNameTextField() {
 
 Widget passwordTextField() {
   return GetBuilder<LoginController>(
+    id: "passwordValid",
     builder: (controller) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           commonTextFiled(
             controller: controller.password,
             text: StringRes.password,
-          )
+            onChanged: controller.loginPassword,
+          ),
+          verticalSizeBox(Get.height*0.0050),
+          controller.passwordError==null?SizedBox():Text(controller.passwordError!,style: TextStyle(color: Colors.red),)
         ],
       );
     },
