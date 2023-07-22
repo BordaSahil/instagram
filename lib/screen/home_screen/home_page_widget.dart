@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -14,7 +15,10 @@ AppBar homePageAppBar() {
     backgroundColor: ColorsRes.white,
     elevation: 0,
     title: Image.asset(AssetRes.instagramColorText, scale: 3),
-    actions: [Image.asset(AssetRes.massege, scale: 6), const SizedBox(width: 5)],
+    actions: [
+      Image.asset(AssetRes.massege, scale: 6),
+      const SizedBox(width: 5)
+    ],
   );
 }
 
@@ -39,18 +43,18 @@ Widget homePageBody() {
   );
 }
 
-Widget roshan(){
+Widget roshan() {
   return GetBuilder<HomeController>(
-      builder:(controller) => SizedBox(
-        height: 300,
-        width: Get.width,
-        child: controller.controller.value.isInitialized
-            ? AspectRatio(
-          aspectRatio: controller.controller.value.aspectRatio,
-          child: VideoPlayer(controller.controller),
-        )
-            : Container(),
-      ),
+    builder: (controller) => SizedBox(
+      height: 300,
+      width: Get.width,
+      child: controller.controller.value.isInitialized
+          ? AspectRatio(
+              aspectRatio: controller.controller.value.aspectRatio,
+              child: VideoPlayer(controller.controller),
+            )
+          : Container(),
+    ),
   );
 }
 
@@ -90,7 +94,8 @@ Widget multiImage() {
             color: ColorsRes.black,
           ),
         ),
-        const Positioned(bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
+        const Positioned(
+            bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
       ],
     ),
   );
@@ -142,12 +147,12 @@ Widget roshanRow() {
       return likeRow(
           () => controller.redHart(),
           controller.hart
-              ? const Icon(Icons.favorite, size: 30, color: Colors.red)
-              : const Icon(Icons.favorite_border_outlined, size: 30),
+              ? const Icon(Icons.favorite, size: 25, color: Colors.red)
+              : const Icon(Icons.favorite_border_outlined, size: 25),
           () => controller.bookMark(),
           controller.book
-              ? const Icon(Icons.bookmark, size: 30)
-              : const Icon(Icons.bookmark_border, size: 30));
+              ? const Icon(Icons.bookmark, size: 25)
+              : const Icon(Icons.bookmark_border, size: 25));
     },
   );
 }
@@ -160,18 +165,19 @@ Widget vishalRow() {
       return likeRow(
           () => controller.vRedHart(),
           controller.vHart
-              ? const Icon(Icons.favorite, size: 30, color: Colors.red)
-              : const Icon(Icons.favorite_border_outlined, size: 30),
+              ? const Icon(Icons.favorite, size: 25, color: Colors.red)
+              : const Icon(Icons.favorite_border_outlined, size: 25),
           () => controller.vBookMark(),
           controller.vBook
-              ? const Icon(Icons.bookmark, size: 30)
-              : const Icon(Icons.bookmark_border, size: 30));
+              ? const Icon(Icons.bookmark, size: 25)
+              : const Icon(Icons.bookmark_border, size: 25));
     },
   );
 }
 
 //-----------------------like row---------------------------------
-Widget likeRow(void Function()? onPressed, Icon iconData, void Function()? onPressedBook, Icon iconBook) {
+Widget likeRow(void Function()? onPressed, Icon iconData,
+    void Function()? onPressedBook, Icon iconBook) {
   return Row(
     children: [
       IconButton(onPressed: onPressed, icon: iconData),
@@ -179,9 +185,12 @@ Widget likeRow(void Function()? onPressed, Icon iconData, void Function()? onPre
         builder: (controller) {
           return GestureDetector(
             onTap: () => controller.openBottomSheet(),
-            child: Image.asset(
-              AssetRes.comment,
-              scale: 8,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                EvaIcons.messageCircleOutline,
+                size: 25,
+              ),
             ),
           );
         },
@@ -190,9 +199,12 @@ Widget likeRow(void Function()? onPressed, Icon iconData, void Function()? onPre
         builder: (controller) {
           return GestureDetector(
             onTap: () => controller.openBottomSheetHome(),
-            child: Image.asset(
-              AssetRes.send,
-              scale: 5,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                EvaIcons.paperPlaneOutline,
+                size: 25,
+              ),
             ),
           );
         },
@@ -227,7 +239,8 @@ Widget commentText() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(StringRes.commentstext, style: TextStyle(color: ColorsRes.black45)),
+        Text(StringRes.commentstext,
+            style: TextStyle(color: ColorsRes.black45)),
         Row(
           children: [
             CircleAvatar(
@@ -268,15 +281,19 @@ Widget story() {
                 padding: const EdgeInsets.all(3),
                 child: Container(
                   decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: ColorsRes.colorList), shape: BoxShape.circle),
+                      gradient: LinearGradient(colors: ColorsRes.colorList),
+                      shape: BoxShape.circle),
                   child: Padding(
                     padding: const EdgeInsets.all(2),
                     child: Container(
-                      decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                      decoration: const BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
                       child: Padding(
                         padding: const EdgeInsets.all(3),
-                        child:
-                            CircleAvatar(backgroundImage: AssetImage(AssetRes.listImage[index]), radius: 35),
+                        child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage(AssetRes.listImage[index]),
+                            radius: 35),
                       ),
                     ),
                   ),
