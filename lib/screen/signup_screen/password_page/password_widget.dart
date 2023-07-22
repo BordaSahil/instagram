@@ -38,9 +38,12 @@ Widget passwordPageBody() {
 
 Widget passwordTextField() {
   return GetBuilder<SignupController>(
+    id: "password",
     builder: (controller) {
       return commonTextFiled(
-          text: StringRes.password, controller: controller.password);
+          controller: controller.password,
+          text: StringRes.password,
+          onChanged: controller.signupPassword);
     },
   );
 }
@@ -54,7 +57,7 @@ Widget nextPassword() {
         textSize: 17,
         minHeight: Get.height * 0.060,
         color: Colors.blue.shade600,
-        onPressed: () {},
+        onPressed: () => controller.goToHome(),
       );
     },
   );

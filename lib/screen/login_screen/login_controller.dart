@@ -19,12 +19,25 @@ class LoginController extends GetxController {
     "Polski",
   ];
 
+  String? phoneUserError;
+  void loginPhoneUser(String? value) {
+    if (value == null || value.isEmpty) {
+      phoneUserError = "Please enter detail";
+    } else if (!(value.isEmail)) {
+      phoneUserError = "Enter valid email";
+    } else {
+      phoneUserError = null;
+    }
+    update(["phoneUser"]);
+  }
+
   void onChangeButton(String? newValue) {
     dropdownValue = newValue!;
     update(["dropdown"]);
   }
 
   void goToHomeScreen() {
+    update(["phoneUser"]);
     Get.off(() => const DashboardPage());
   }
 

@@ -10,6 +10,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: loginScreenBody(),
     );
   }

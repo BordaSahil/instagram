@@ -34,9 +34,25 @@ Widget signupPageBody() {
 
 Widget userNameTextField() {
   return GetBuilder<SignupController>(
+    id: "userName",
     builder: (controller) {
-      return commonTextFiled(
-          text: StringRes.userName, controller: controller.signupUserName);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commonTextFiled(
+            controller: controller.signupUserName,
+            text: StringRes.userName,
+            onChanged: (value) => controller.signupUserNameValidation(value),
+          ),
+          horizontalSizeBox(Get.height * 0.015),
+          controller.userNameError == null
+              ? const SizedBox()
+              : Text(
+                  controller.userNameError!,
+                  style: const TextStyle(color: Colors.red),
+                )
+        ],
+      );
     },
   );
 }
