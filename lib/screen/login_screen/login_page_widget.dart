@@ -11,17 +11,12 @@ Widget loginScreenBody() {
   return Column(
     children: [
       Padding(
-        padding: EdgeInsets.only(
-            left: Get.width * 0.060,
-            right: Get.width * 0.060,
-            top: Get.height * 0.05),
+        padding: EdgeInsets.only(left: Get.width * 0.060, right: Get.width * 0.060, top: Get.height * 0.05),
         child: Column(
           children: [
             dropdownButton(),
             verticalSizeBox(Get.height * 0.15),
-            SizedBox(
-                height: Get.height * 0.060,
-                child: Image.asset(AssetRes.instagramText)),
+            SizedBox(height: Get.height * 0.060, child: Image.asset(AssetRes.instagramText)),
             verticalSizeBox(Get.height * 0.040),
             userNameTextField(),
             verticalSizeBox(Get.height * 0.020),
@@ -72,10 +67,7 @@ Widget passwordTextField() {
   return GetBuilder<LoginController>(
     builder: (controller) {
       return Column(
-        children: [
-          commonTextFiled(
-              text: StringRes.password, controller: controller.password)
-        ],
+        children: [commonTextFiled(text: StringRes.password, controller: controller.password)],
       );
     },
   );
@@ -128,10 +120,7 @@ Widget getHelp() {
   return TextButton(
       onPressed: () {},
       child: Text(StringRes.getLogging,
-          style: TextStyle(
-              fontSize: 13,
-              color: Colors.indigo.shade900,
-              fontWeight: FontWeight.bold)));
+          style: TextStyle(fontSize: 13, color: Colors.indigo.shade900, fontWeight: FontWeight.bold)));
 }
 
 Widget dividerRow() {
@@ -146,10 +135,7 @@ Widget dividerRow() {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Text(
           StringRes.or,
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey.shade600,
-              fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
         ),
       ),
       const Expanded(
@@ -191,10 +177,7 @@ Widget signupRow() {
               onPressed: () => controller.goToSignup(),
               child: Text(
                 StringRes.signup,
-                style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.indigo.shade900,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13, color: Colors.indigo.shade900, fontWeight: FontWeight.bold),
               ));
         },
       )

@@ -13,10 +13,7 @@ AppBar homePageAppBar() {
     backgroundColor: ColorsRes.white,
     elevation: 0,
     title: Image.asset(AssetRes.instagramColorText, scale: 3),
-    actions: [
-      Image.asset(AssetRes.massege, scale: 6),
-      const SizedBox(width: 5)
-    ],
+    actions: [Image.asset(AssetRes.massege, scale: 6), const SizedBox(width: 5)],
   );
 }
 
@@ -76,8 +73,7 @@ Widget multiImage() {
             color: ColorsRes.black,
           ),
         ),
-        const Positioned(
-            bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
+        const Positioned(bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
       ],
     ),
   );
@@ -158,8 +154,7 @@ Widget vishalRow() {
 }
 
 //-----------------------like row---------------------------------
-Widget likeRow(void Function()? onPressed, Icon iconData,
-    void Function()? onPressedBook, Icon iconBook) {
+Widget likeRow(void Function()? onPressed, Icon iconData, void Function()? onPressedBook, Icon iconBook) {
   return Row(
     children: [
       IconButton(onPressed: onPressed, icon: iconData),
@@ -215,8 +210,7 @@ Widget commentText() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(StringRes.commentstext,
-            style: TextStyle(color: ColorsRes.black45)),
+        Text(StringRes.commentstext, style: TextStyle(color: ColorsRes.black45)),
         Row(
           children: [
             CircleAvatar(
@@ -257,19 +251,15 @@ Widget story() {
                 padding: const EdgeInsets.all(3),
                 child: Container(
                   decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: ColorsRes.colorList),
-                      shape: BoxShape.circle),
+                      gradient: LinearGradient(colors: ColorsRes.colorList), shape: BoxShape.circle),
                   child: Padding(
                     padding: const EdgeInsets.all(2),
                     child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
+                      decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                       child: Padding(
                         padding: const EdgeInsets.all(3),
-                        child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(AssetRes.listImage[index]),
-                            radius: 35),
+                        child:
+                            CircleAvatar(backgroundImage: AssetImage(AssetRes.listImage[index]), radius: 35),
                       ),
                     ),
                   ),

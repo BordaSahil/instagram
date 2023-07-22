@@ -2,26 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/utils/color_res.dart';
 
-Widget elevatedButtonCommon(
-    {required void Function()? onPressed, required String text}) {
+Widget elevatedButtonCommon({required void Function()? onPressed, required String text}) {
   return ElevatedButton(
       style: ButtonStyle(
         elevation: const MaterialStatePropertyAll(0),
-        fixedSize: MaterialStatePropertyAll(
-            Size(Get.width * 0.85, Get.height * 0.060)),
+        fixedSize: MaterialStatePropertyAll(Size(Get.width * 0.85, Get.height * 0.060)),
         backgroundColor: MaterialStatePropertyAll(Colors.blue.shade600),
       ),
       onPressed: onPressed,
       child: Text(
         text,
-        style: const TextStyle(
-            fontSize: 17, color: ColorsRes.white, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 17, color: ColorsRes.white, fontWeight: FontWeight.bold),
       ));
 }
 
 class ButtonWidget extends StatelessWidget {
   final String text;
   final Color color;
+  final List<Color>? colors;
   final Color? textColor;
   final double? minWidth;
   final double? minHeight;
@@ -38,6 +36,7 @@ class ButtonWidget extends StatelessWidget {
     Key? key,
     required this.text,
     required this.color,
+    this.colors,
     this.textColor,
     this.minWidth,
     required this.onPressed,
@@ -58,37 +57,6 @@ class ButtonWidget extends StatelessWidget {
       height: minHeight ?? Get.height * 0.4,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            icon != null
-                ? Icon(
-                    icon,
-                    color: Colors.white,
-                    size: 30,
-                  )
-                : SizedBox(),
-            icon != null ? SizedBox(width: 3) : SizedBox(),
-            image != null
-                ? Container(
-                    height: minHeight ?? Get.height * 0.4 - 20,
-                    padding: EdgeInsets.only(top: 8, bottom: 8, right: 10),
-                    child: Image.asset(
-                      image!,
-                      fit: BoxFit.fitHeight,
-                    ))
-                : SizedBox(),
-            Text(
-              text,
-              style: TextStyle(
-                  color: textColor ?? Colors.blue.shade600,
-                  fontSize: textSize ?? 12,
-                  fontWeight: fontWeight ?? FontWeight.bold,
-                  fontFamily: fontFamily ?? 'Helvetica_normal'),
-            ),
-          ],
-        ),
         style: ElevatedButton.styleFrom(
           elevation: 0,
           primary: color,
@@ -99,7 +67,38 @@ class ButtonWidget extends StatelessWidget {
               color: borderColor ?? Colors.blue.shade600,
             ),
           ),
-          padding: EdgeInsets.all(1),
+          padding: const EdgeInsets.all(1),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            icon != null
+                ? Icon(
+                    icon,
+                    color: Colors.white,
+                    size: 30,
+                  )
+                : const SizedBox(),
+            icon != null ? const SizedBox(width: 3) : const SizedBox(),
+            image != null
+                ? Container(
+                    height: minHeight ?? Get.height * 0.4 - 20,
+                    padding: const EdgeInsets.only(top: 8, bottom: 8, right: 10),
+                    child: Image.asset(
+                      image!,
+                      fit: BoxFit.fitHeight,
+                    ))
+                : const SizedBox(),
+            Text(
+              text,
+              style: TextStyle(
+                  color: textColor ?? Colors.blue.shade600,
+                  fontSize: textSize ?? 12,
+                  fontWeight: fontWeight ?? FontWeight.bold,
+                  fontFamily: fontFamily ?? 'Helvetica_normal'),
+            ),
+          ],
         ),
       ),
     );
