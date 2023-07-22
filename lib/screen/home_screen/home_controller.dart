@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reels_viewer/reels_viewer.dart';
 import 'package:video_player/video_player.dart';
 
 class HomeController extends GetxController {
@@ -8,22 +9,41 @@ class HomeController extends GetxController {
   bool book = false;
   bool vBook = false;
 
-  @override
-  void onInit() {
-    controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),)
-    ..initialize().then((_) {
-    });
-    super
-    .
-    onInit
-    (
-    );
-  }
-
   late final PageController pageController;
   late VideoPlayerController controller;
   int selectedIndex = 0;
+
+  List<ReelModel> reelsList = [
+    ReelModel(
+        'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
+        '',
+        profileUrl: '',
+        commentList: [
+          ReelCommentModel(
+            comment: '',
+            userProfilePic: '',
+            userName: '',
+            commentTime: DateTime.now(),
+          ),
+          ReelCommentModel(
+            comment: '',
+            userProfilePic: '',
+            userName: '',
+            commentTime: DateTime.now(),
+          ),
+          ReelCommentModel(
+            comment: '',
+            userProfilePic: '',
+            userName: '',
+            commentTime: DateTime.now(),
+          ),
+        ]),
+  ];
+  @override
+  void onInit() {
+    // update(["video"]);
+    super.onInit();
+  }
 
   void onPageChange(int? index) {
     selectedIndex = index!;

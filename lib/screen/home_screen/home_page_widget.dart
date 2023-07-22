@@ -1,4 +1,3 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -8,7 +7,7 @@ import 'package:instagram/utils/asset_res.dart';
 import 'package:instagram/utils/color_res.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:readmore/readmore.dart';
-import 'package:video_player/video_player.dart';
+import 'package:reels_viewer/reels_viewer.dart';
 
 AppBar homePageAppBar() {
   return AppBar(
@@ -45,15 +44,19 @@ Widget homePageBody() {
 
 Widget roshan() {
   return GetBuilder<HomeController>(
+    id: "video",
     builder: (controller) => SizedBox(
-      height: 300,
+      height: Get.height * 0.6,
       width: Get.width,
-      child: controller.controller.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: controller.controller.value.aspectRatio,
-              child: VideoPlayer(controller.controller),
-            )
-          : Container(),
+      child: ReelsViewer(
+        reelsList: controller.reelsList,
+        onIndexChanged: (p0) {
+          return 0;
+        },
+        showAppbar: false,
+        showVerifiedTick: false,
+        onComment: (p0) {},
+      ),
     ),
   );
 }
