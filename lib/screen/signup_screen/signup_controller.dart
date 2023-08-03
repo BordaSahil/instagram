@@ -22,7 +22,7 @@ class SignupController extends GetxController {
   void signupUserNameValidation(String? value) {
     if (value == null || value.isEmpty) {
       userNameError = "Please Enter Detail";
-    } else if (!(value.isEmail)) {
+    } else if (!(value.isAlphabetOnly)) {
       userNameError = "Enter valid username";
     } else {
       userNameError = null;
@@ -31,7 +31,7 @@ class SignupController extends GetxController {
   }
 
   String? passwordError;
-  void signupPassword(String? value) {
+  void signupPasswordValidation(String? value) {
     if (value == null || value.isEmpty) {
       passwordError = "Please Enter Password";
     } else if (!(value.length > 8)) {
@@ -40,6 +40,30 @@ class SignupController extends GetxController {
       passwordError = null;
     }
     update(["password"]);
+  }
+
+  String? mobileError;
+  void signupMobile(String? value) {
+    if (value == null || value.isEmpty) {
+      mobileError = "Please Enter Mobile number";
+    } else if (!(value.isPhoneNumber)) {
+      mobileError = "Please Enter valid number";
+    } else {
+      passwordError = null;
+    }
+    update(["mobileValidation"]);
+  }
+
+  String? emailError;
+  void signupEmailValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      emailError = 'Please Enter Email';
+    } else if (!(value.isEmail)) {
+      emailError = "Please Enter valid email";
+    } else {
+      emailError = null;
+    }
+    update(["emailValidation"]);
   }
 
   void checkBox() {
@@ -53,11 +77,6 @@ class SignupController extends GetxController {
   }
 
   Future<void> goToHome() async {
-    // Map<String, dynamic> passwordSet = {
-    //   "userName": signupUserName.text.trim(),
-    //   "password": password.text.trim()
-    // };
-    // await FireBaseServices.setData("userData", passwordSet);
     update(["password"]);
     Get.to(() => const AddPhoneOrEmail());
   }

@@ -24,9 +24,25 @@ class EmailPage extends StatelessWidget {
 
 Widget enterEmail() {
   return GetBuilder<SignupController>(
+    id: "emailValidation",
     builder: (controller) {
-      return commonTextFiled(
-          text: StringRes.email, controller: controller.signupEmail);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commonTextFiled(
+            text: StringRes.email,
+            controller: controller.signupEmail,
+            onChanged: (value) => controller.signupEmailValidation(value),
+          ),
+          verticalSizeBox(Get.height * 0.0050),
+          controller.emailError == null
+              ? const SizedBox()
+              : Text(
+                  controller.emailError!,
+                  style: const TextStyle(color: Colors.red),
+                )
+        ],
+      );
     },
   );
 }
