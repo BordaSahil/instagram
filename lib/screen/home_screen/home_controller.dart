@@ -16,12 +16,11 @@ class HomeController extends GetxController {
   int selectedIndex = 0;
 
  static List searchBarList = [
-    "Flutter",
-    "Twitter",
-    "Facebook",
-    "Google",
-    "Instagram",
-    "Youtube",
+    "Roshan",
+    "Sahil",
+    "Axay",
+    "Chintan",
+    "Jaydip",
   ];
 
   List<ReelModel> reelsList = [
@@ -34,7 +33,6 @@ class HomeController extends GetxController {
 
   void onPageChange(int? index) {
     selectedIndex = index!;
-    print(index);
     update(["pageView", "count"]);
   }
 

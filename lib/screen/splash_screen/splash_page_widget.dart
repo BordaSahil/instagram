@@ -14,7 +14,7 @@ Widget splashScreenBOdy() {
         width: Get.width,
         child: Lottie.asset('asset/lottie/instagram.json'),
       ),
-      Image.asset("asset/image/instagram_color.png", scale: 2.7),
+      Image.asset("asset/image/instagram_color.png", scale: 3),
       SizedBox(height: Get.height * 0.20),
       SizedBox(
         height: Get.height * 0.10,

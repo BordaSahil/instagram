@@ -23,7 +23,7 @@ AppBar homePageAppBar() {
       shadow: const [
         BoxShadow(
           color: Colors.black38,
-          blurRadius: 5,
+          blurRadius: 3,
         ),
       ],
       backgroundColor: Colors.white,
