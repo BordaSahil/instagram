@@ -50,6 +50,8 @@ dependencies:
   firebase_core:
   firebase_database:
   search_bar_animated: ^1.0.2
+  pinput: ^2.4.0
+  firebase_auth: 
 
 
 dev_dependencies:
