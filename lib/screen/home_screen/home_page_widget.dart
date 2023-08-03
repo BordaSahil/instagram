@@ -9,12 +9,58 @@ import 'package:instagram/utils/color_res.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:readmore/readmore.dart';
 import 'package:reels_viewer/reels_viewer.dart';
+import 'package:search_bar_animated/search_bar_animated.dart';
 
 AppBar homePageAppBar() {
   return AppBar(
     backgroundColor: ColorsRes.white,
     elevation: 0,
-    title: Image.asset(AssetRes.instagramColorText, scale: 3),
+    leading: Image.asset(
+      AssetRes.instagramLogo,
+      scale: 3.5,
+    ),
+    title: AnimatedSearchBar(
+      shadow: const [
+        BoxShadow(
+          color: Colors.black38,
+          blurRadius: 5,
+        ),
+      ],
+      backgroundColor: Colors.white,
+      buttonColor: Colors.black,
+      width: Get.width * 0.7,
+      submitButtonColor: Colors.black,
+      textStyle: const TextStyle(color: Colors.black),
+      buttonIcon: const Icon(
+        Icons.search,
+      ),
+      duration: const Duration(milliseconds: 1000),
+      submitIcon: const Icon(Icons.cancel),
+      animationAlignment: AnimationAlignment.left,
+      onSubmit: () {
+        /* setState(() {
+            value = textController.text;
+          });*/
+      },
+      searchList: HomeController.searchBarList,
+      searchQueryBuilder: (query, list) => list.where((item) {
+        return item!.toString().toLowerCase().contains(query.toLowerCase());
+      }).toList(),
+      // textController: textController,
+      overlaySearchListItemBuilder: (dynamic item) => Container(
+        padding: const EdgeInsets.all(8),
+        child: Text(
+          item,
+          style: const TextStyle(fontSize: 15, color: Colors.black),
+        ),
+      ),
+      /* onItemSelected: (dynamic item) {
+          textController.value = textController.value.copyWith(
+            text: item.toString(),
+          );
+        },*/
+      overlaySearchListHeight: 100,
+    ),
     actions: [
       Image.asset(AssetRes.massege, scale: 6),
       const SizedBox(width: 5)
@@ -26,7 +72,7 @@ Widget homePageBody() {
   return ListView(
     physics: const BouncingScrollPhysics(),
     children: [
-      story(),
+      // story(),
       post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
       multiImage(),
       vishalRow(),
@@ -314,7 +360,7 @@ Widget story() {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: profileStory(),
               ),
-              Text("Story")
+              const Text("Story")
             ],
           );
         }

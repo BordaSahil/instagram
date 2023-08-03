@@ -49,6 +49,7 @@ dependencies:
   reels_viewer: ^1.0.0+3
   firebase_core:
   firebase_database:
+  search_bar_animated: ^1.0.2
 
 
 dev_dependencies:

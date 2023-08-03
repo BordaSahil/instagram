@@ -12,6 +12,7 @@ class AssetRes {
   static const comment = "asset/image/comment_icon.png";
   static const send = "asset/image/send_icon.png";
   static const massege = "asset/image/messenger_icon.png";
+  static const instagramLogo = "asset/image/instagram_logo.jpg";
   static const instagramColorText = "asset/image/instagram_color.png";
   static List listImage = [
     "asset/image/sahil.jpg",

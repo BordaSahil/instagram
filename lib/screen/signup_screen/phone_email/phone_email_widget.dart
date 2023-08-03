@@ -9,14 +9,14 @@ Widget phoneOrEmailPageBody() {
         horizontal: Get.width * 0.060, vertical: Get.height * 0.10),
     child: Column(
       children: [
-        Center(
+        const Center(
           child: Text(
             StringRes.chooseUserName,
             style: TextStyle(fontSize: 25, color: Colors.black),
           ),
         ),
         verticalSizeBox(Get.height * 0.020),
-        Text(
+        const Text(
           StringRes.changeItLater,
           style: TextStyle(color: Colors.black45),
         ),
@@ -28,5 +28,5 @@ Widget phoneOrEmailPageBody() {
 }
 
 Widget phoneTextField() {
-  return TextField();
+  return const TextField();
 }

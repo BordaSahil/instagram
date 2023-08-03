@@ -15,6 +15,15 @@ class HomeController extends GetxController {
   late VideoPlayerController controller;
   int selectedIndex = 0;
 
+ static List searchBarList = [
+    "Flutter",
+    "Twitter",
+    "Facebook",
+    "Google",
+    "Instagram",
+    "Youtube",
+  ];
+
   List<ReelModel> reelsList = [
     ReelModel(
       'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
