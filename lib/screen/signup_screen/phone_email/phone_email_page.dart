@@ -6,8 +6,11 @@ class AddPhoneOrEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: phoneOrEmailPageBody(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: phoneOrEmailPageBody(),
+      ),
     );
   }
 }
