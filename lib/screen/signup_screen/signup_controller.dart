@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
+import 'package:instagram/services/firebase_service.dart';
 
 import 'password_page/password_page.dart';
 
@@ -9,6 +10,7 @@ class SignupController extends GetxController {
 
   TextEditingController signupUserName = TextEditingController();
   TextEditingController password = TextEditingController();
+
   String? userNameError;
   void signupUserNameValidation(String? value) {
     if (value == null || value.isEmpty) {
@@ -38,12 +40,17 @@ class SignupController extends GetxController {
     update(["checkBox"]);
   }
 
-  void goToPassword() {
+  Future<void> goToPassword() async {
     update(["userName"]);
     Get.to(() => const PasswordScreen());
   }
 
-  void goToHome() {
+  Future<void> goToHome() async {
+    Map<String, dynamic> passwordSet = {
+      "userName": signupUserName.text.trim(),
+      "password": password.text.trim()
+    };
+    await FireBaseServices.setData("userData", passwordSet);
     update(["password"]);
     Get.off(() => const DashboardPage());
   }

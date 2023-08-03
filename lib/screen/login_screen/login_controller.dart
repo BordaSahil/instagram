@@ -49,7 +49,7 @@ class LoginController extends GetxController {
   }
 
   void goToHomeScreen() {
-    update(["phoneUser","passwordValid"]);
+    update(["phoneUser", "passwordValid"]);
     Get.off(() => const DashboardPage());
   }
 
