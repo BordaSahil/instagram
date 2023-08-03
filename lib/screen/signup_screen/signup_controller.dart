@@ -104,7 +104,6 @@ class SignupController extends GetxController {
 
   Color focusedBorderColor = const Color.fromRGBO(23, 171, 144, 1);
   Color fillColor = const Color.fromRGBO(243, 246, 249, 0);
-  // Color borderColor = Color(Colors.black as int);
 
   PinTheme defaultPinTheme = PinTheme(
     width: 56,
@@ -116,7 +115,6 @@ class SignupController extends GetxController {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(19),
       border: Border.all(
-        // color: Color(Colors.black as int),
       ),
     ),
   );
