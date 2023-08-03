@@ -30,9 +30,25 @@ class PhonePage extends StatelessWidget {
 
 Widget enterPhone() {
   return GetBuilder<SignupController>(
+    id: "mobileValidation",
     builder: (controller) {
-      return commonTextFiled(
-          text: StringRes.phone, controller: controller.signupPhone);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commonTextFiled(
+            text: StringRes.phone,
+            controller: controller.signupPhone,
+            onChanged: (value) => controller.signupMobile(value),
+          ),
+          verticalSizeBox(Get.height * 0.0050),
+          controller.mobileError == null
+              ? const SizedBox()
+              : Text(
+                  controller.mobileError!,
+                  style: const TextStyle(color: Colors.red),
+                )
+        ],
+      );
     },
   );
 }

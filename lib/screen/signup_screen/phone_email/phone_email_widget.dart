@@ -17,21 +17,14 @@ Widget tabBar() {
       children: [
         const Center(
           child: Text(
-            StringRes.chooseUserName,
+            StringRes.addPhoneOrEmail,
             style: TextStyle(fontSize: 25, color: Colors.black),
           ),
         ),
-        verticalSizeBox(Get.height * 0.020),
-        const Text(
-          StringRes.changeItLater,
-          style: TextStyle(color: Colors.black45),
-        ),
-        verticalSizeBox(Get.height * 0.025),
         verticalSizeBox(Get.height * 0.025),
         const TabBar(
           labelColor: Colors.black,
-          indicatorColor: Colors.blue,
-          labelPadding: EdgeInsets.all(0),
+          indicatorColor: Colors.black,
           unselectedLabelStyle:
               TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
@@ -53,8 +46,4 @@ Widget tabBar() {
       ],
     ),
   );
-}
-
-Widget phoneTextField() {
-  return const TextField();
 }

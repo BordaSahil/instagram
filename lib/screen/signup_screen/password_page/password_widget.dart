@@ -40,10 +40,22 @@ Widget passwordTextField() {
   return GetBuilder<SignupController>(
     id: "password",
     builder: (controller) {
-      return commonTextFiled(
-          controller: controller.password,
-          text: StringRes.password,
-          onChanged: controller.signupPassword);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commonTextFiled(
+              controller: controller.password,
+              text: StringRes.password,
+              onChanged: (value) => controller.signupPasswordValidation(value)),
+          verticalSizeBox(Get.height * 0.0050),
+          controller.passwordError == null
+              ? const SizedBox()
+              : Text(
+                  controller.passwordError!,
+                  style: const TextStyle(color: Colors.red),
+                )
+        ],
+      );
     },
   );
 }

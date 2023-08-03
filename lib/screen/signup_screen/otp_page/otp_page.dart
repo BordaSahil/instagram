@@ -11,8 +11,7 @@ class OtpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:otpScreen(),
-
+      body: otpScreen(),
 
       /*Padding(
         padding: EdgeInsets.symmetric(
@@ -22,6 +21,11 @@ class OtpPage extends StatelessWidget {
             const Text(
               StringRes.otp,
               style: TextStyle(fontSize: 25, color: Colors.black),
+            const Center(
+              child: Text(
+                StringRes.otp,
+                style: TextStyle(fontSize: 25, color: Colors.black),
+              ),
             ),
             otpSubmit(),
           ],
