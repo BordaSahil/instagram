@@ -47,6 +47,8 @@ dependencies:
   video_player: ^2.7.0
   eva_icons_flutter:
   reels_viewer: ^1.0.0+3
+  firebase_core:
+  firebase_database:
 
 
 dev_dependencies:

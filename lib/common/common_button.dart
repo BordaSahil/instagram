@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/utils/color_res.dart';
 
-Widget elevatedButtonCommon({required void Function()? onPressed, required String text}) {
+Widget elevatedButtonCommon(
+    {required void Function()? onPressed, required String text}) {
   return ElevatedButton(
       style: ButtonStyle(
         elevation: const MaterialStatePropertyAll(0),
-        fixedSize: MaterialStatePropertyAll(Size(Get.width * 0.85, Get.height * 0.060)),
+        fixedSize: MaterialStatePropertyAll(
+            Size(Get.width * 0.85, Get.height * 0.060)),
         backgroundColor: MaterialStatePropertyAll(Colors.blue.shade600),
       ),
       onPressed: onPressed,
       child: Text(
         text,
-        style: const TextStyle(fontSize: 17, color: ColorsRes.white, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+            fontSize: 17, color: ColorsRes.white, fontWeight: FontWeight.bold),
       ));
 }
 
@@ -84,7 +87,8 @@ class ButtonWidget extends StatelessWidget {
             image != null
                 ? Container(
                     height: minHeight ?? Get.height * 0.4 - 20,
-                    padding: const EdgeInsets.only(top: 8, bottom: 8, right: 10),
+                    padding:
+                        const EdgeInsets.only(top: 8, bottom: 8, right: 10),
                     child: Image.asset(
                       image!,
                       fit: BoxFit.fitHeight,
