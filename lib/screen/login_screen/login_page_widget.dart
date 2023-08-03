@@ -90,8 +90,13 @@ Widget passwordTextField() {
             text: StringRes.password,
             onChanged: controller.loginPassword,
           ),
-          verticalSizeBox(Get.height*0.0050),
-          controller.passwordError==null?SizedBox():Text(controller.passwordError!,style: TextStyle(color: Colors.red),)
+          verticalSizeBox(Get.height * 0.0050),
+          controller.passwordError == null
+              ? SizedBox()
+              : Text(
+                  controller.passwordError!,
+                  style: TextStyle(color: Colors.red),
+                )
         ],
       );
     },

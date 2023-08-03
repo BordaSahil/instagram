@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -22,23 +23,26 @@ AppBar homePageAppBar() {
 }
 
 Widget homePageBody() {
-  return SingleChildScrollView(
-    child: Column(
-      children: [
-        story(),
-        post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
-        // Image.asset(AssetRes.roshan),
-        roshan(),
-        roshanRow(),
-        readMoreRow(),
-        commentText(),
-        post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
-        multiImage(),
-        vishalRow(),
-        readMoreRow(),
-        commentText(),
-      ],
-    ),
+  return ListView(
+    physics: const BouncingScrollPhysics(),
+    children: [
+      story(),
+      post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
+      multiImage(),
+      vishalRow(),
+      readMoreRow(),
+      commentText(),
+      post(AssetRes.akshayBhai, StringRes.akshayBhai, StringRes.sudhirSub),
+      Image.asset(AssetRes.akshayBhai),
+      akshayRow(),
+      readMoreRow(),
+      commentText(),
+      post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
+      roshan(),
+      roshanRow(),
+      readMoreRow(),
+      commentText(),
+    ],
   );
 }
 
@@ -50,9 +54,6 @@ Widget roshan() {
       width: Get.width,
       child: ReelsViewer(
         reelsList: controller.reelsList,
-        onIndexChanged: (p0) {
-          return 0;
-        },
         showAppbar: false,
         showVerifiedTick: false,
         onComment: (p0) {},
@@ -88,14 +89,26 @@ Widget multiImage() {
             );
           },
         ),
-        const Positioned(
-          right: 20,
-          top: 5,
-          child: Icon(
-            Icons.file_copy_outlined,
-            size: 30,
-            color: ColorsRes.black,
-          ),
+        GetBuilder<HomeController>(
+          id: "count",
+          builder: (controller) {
+            return Positioned(
+                right: 20,
+                top: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: ColorsRes.black),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12, right: 12, top: 8, bottom: 8),
+                    child: Text(
+                      "${controller.selectedIndex}/6",
+                      style: const TextStyle(color: ColorsRes.white),
+                    ),
+                  ),
+                ));
+          },
         ),
         const Positioned(
             bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
@@ -108,12 +121,12 @@ Widget post(String image, String title, String subTitle) {
   return Column(
     children: [
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
-              radius: 20,
+              radius: 23,
               backgroundImage: AssetImage(image),
             ),
             horizontalSizeBox(10),
@@ -150,12 +163,12 @@ Widget roshanRow() {
       return likeRow(
           () => controller.redHart(),
           controller.hart
-              ? const Icon(Icons.favorite, size: 25, color: Colors.red)
-              : const Icon(Icons.favorite_border_outlined, size: 25),
+              ? const Icon(Icons.favorite, size: 28, color: Colors.red)
+              : const Icon(Icons.favorite_border_outlined, size: 28),
           () => controller.bookMark(),
           controller.book
-              ? const Icon(Icons.bookmark, size: 25)
-              : const Icon(Icons.bookmark_border, size: 25));
+              ? const Icon(Icons.bookmark, size: 28)
+              : const Icon(Icons.bookmark_border, size: 28));
     },
   );
 }
@@ -168,12 +181,29 @@ Widget vishalRow() {
       return likeRow(
           () => controller.vRedHart(),
           controller.vHart
-              ? const Icon(Icons.favorite, size: 25, color: Colors.red)
-              : const Icon(Icons.favorite_border_outlined, size: 25),
+              ? const Icon(Icons.favorite, size: 28, color: Colors.red)
+              : const Icon(Icons.favorite_border_outlined, size: 28),
           () => controller.vBookMark(),
           controller.vBook
-              ? const Icon(Icons.bookmark, size: 25)
-              : const Icon(Icons.bookmark_border, size: 25));
+              ? const Icon(Icons.bookmark, size: 28)
+              : const Icon(Icons.bookmark_border, size: 28));
+    },
+  );
+}
+
+Widget akshayRow() {
+  return GetBuilder<HomeController>(
+    id: "akshay",
+    builder: (controller) {
+      return likeRow(
+          () => controller.aRedHart(),
+          controller.akshay
+              ? const Icon(Icons.favorite, size: 28, color: Colors.red)
+              : const Icon(Icons.favorite_border_outlined, size: 28),
+          () => controller.aBookMark(),
+          controller.aBook
+              ? const Icon(Icons.bookmark, size: 28)
+              : const Icon(Icons.bookmark_border, size: 28));
     },
   );
 }
@@ -192,7 +222,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
               onPressed: () {},
               icon: const Icon(
                 EvaIcons.messageCircleOutline,
-                size: 25,
+                size: 28,
               ),
             ),
           );
@@ -206,7 +236,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
               onPressed: () {},
               icon: const Icon(
                 EvaIcons.paperPlaneOutline,
-                size: 25,
+                size: 28,
               ),
             ),
           );
@@ -271,40 +301,74 @@ Widget commentText() {
 
 Widget story() {
   return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: AssetRes.listImage.length,
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
+    height: Get.height * 0.15,
+    child: ListView.builder(
+      itemCount: AssetRes.listImage.length + 1,
+      scrollDirection: Axis.horizontal,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        if (index == 0) {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(3),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: ColorsRes.colorList),
-                      shape: BoxShape.circle),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
-                      child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage(AssetRes.listImage[index]),
-                            radius: 35),
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: profileStory(),
+              ),
+              Text("Story")
+            ],
+          );
+        }
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(3),
+              child: Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: ColorsRes.colorList),
+                    shape: BoxShape.circle),
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: Colors.white, shape: BoxShape.circle),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: CircleAvatar(
+                          backgroundImage:
+                              AssetImage(AssetRes.listImage[index - 1]),
+                          radius: 35),
                     ),
                   ),
                 ),
               ),
-              Text(AssetRes.storyName[index])
-            ],
-          );
-        },
-      ));
+            ),
+            Text(AssetRes.storyName[index - 1])
+          ],
+        );
+      },
+    ),
+  );
+}
+
+Widget profileStory() {
+  return Center(
+    child: Stack(clipBehavior: Clip.none, children: [
+      const CircleAvatar(
+        radius: 40,
+        backgroundImage: AssetImage(AssetRes.sudhir),
+      ),
+      Positioned(
+        right: 0,
+        bottom: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1),
+          ),
+          child: const Icon(Icons.add, color: Colors.white, size: 18),
+        ),
+      ),
+    ]),
+  );
 }

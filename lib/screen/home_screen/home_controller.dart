@@ -5,6 +5,8 @@ import 'package:video_player/video_player.dart';
 
 class HomeController extends GetxController {
   bool hart = false;
+  bool akshay = false;
+  bool aBook = false;
   bool vHart = false;
   bool book = false;
   bool vBook = false;
@@ -15,40 +17,16 @@ class HomeController extends GetxController {
 
   List<ReelModel> reelsList = [
     ReelModel(
-        'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
-        '',
-        profileUrl: '',
-        commentList: [
-          ReelCommentModel(
-            comment: '',
-            userProfilePic: '',
-            userName: '',
-            commentTime: DateTime.now(),
-          ),
-          ReelCommentModel(
-            comment: '',
-            userProfilePic: '',
-            userName: '',
-            commentTime: DateTime.now(),
-          ),
-          ReelCommentModel(
-            comment: '',
-            userProfilePic: '',
-            userName: '',
-            commentTime: DateTime.now(),
-          ),
-        ]),
+      'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
+      '',
+      profileUrl: '',
+    ),
   ];
-  @override
-  void onInit() {
-    // update(["video"]);
-    super.onInit();
-  }
 
   void onPageChange(int? index) {
     selectedIndex = index!;
     print(index);
-    update(["pag;eView"]);
+    update(["pageView", "count"]);
   }
 
   //-----------------like***************
@@ -62,6 +40,11 @@ class HomeController extends GetxController {
     update(["vishal"]);
   }
 
+  void aRedHart() {
+    akshay = !akshay;
+    update(["akshay"]);
+  }
+
   //----------------------book---------------------
   void bookMark() {
     book = !book;
@@ -71,6 +54,11 @@ class HomeController extends GetxController {
   void vBookMark() {
     vBook = !vBook;
     update(["vishal"]);
+  }
+
+  void aBookMark() {
+    aBook = !aBook;
+    update(["akshay"]);
   }
 
   void openBottomSheet() {
