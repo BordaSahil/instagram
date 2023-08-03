@@ -5,6 +5,25 @@ import 'package:instagram/screen/signup_screen/signup_controller.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:pinput/pinput.dart';
 
+
+
+Widget otpSubmit() {
+  return GetBuilder<SignupController>(
+    builder: (controller) {
+      return ButtonWidget(
+        text: StringRes.next,
+        textColor: Colors.white,
+        textSize: 17,
+        color: Colors.blue.shade600,
+        minHeight: Get.height * 0.060,
+        onPressed: () {},
+      );
+    },
+  );
+}
+
+
+
 Widget otpScreen() {
   return GetBuilder<SignupController>(
     id: 'OtpVerification',
@@ -21,6 +40,7 @@ Widget otpScreen() {
             Directionality(
               textDirection: TextDirection.ltr,
               child: Pinput(
+                length: 6,
                 controller: controller.pinController,
                 focusNode: controller.focusNode,
                 androidSmsAutofillMethod:
@@ -29,12 +49,8 @@ Widget otpScreen() {
                 defaultPinTheme: controller.defaultPinTheme,
                 separatorBuilder: (index) => const SizedBox(width: 8),
                 validator: (value) {
-                  return value == '2222' ? null : 'Pin is incorrect';
+                  return value == '222222' ? null : 'Pin is incorrect';
                 },
-                // onClipboardFound: (value) {
-                //   debugPrint('onClipboardFound: $value');
-                //   pinController.setText(value);
-                // },
                 hapticFeedbackType: HapticFeedbackType.lightImpact,
                 onCompleted: (pin) {
                   debugPrint('onCompleted: $pin');
@@ -47,7 +63,7 @@ Widget otpScreen() {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(bottom: 9),
-                      width: 22,
+                      width: Get.width/6,
                       height: 1,
                       color: Colors.blueAccent,
                     ),
