@@ -5,38 +5,22 @@ import 'package:instagram/screen/signup_screen/signup_controller.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:pinput/pinput.dart';
 
-
-
-Widget otpSubmit() {
-  return GetBuilder<SignupController>(
-    builder: (controller) {
-      return ButtonWidget(
-        text: StringRes.next,
-        textColor: Colors.white,
-        textSize: 17,
-        color: Colors.blue.shade600,
-        minHeight: Get.height * 0.060,
-        onPressed: () {},
-      );
-    },
-  );
-}
-
-
-
 Widget otpScreen() {
   return GetBuilder<SignupController>(
     id: 'OtpVerification',
     builder: (controller) => Form(
       key: controller.formKey,
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: Get.width*0.060),
+        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.060),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(StringRes.otp,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-            SizedBox(height: Get.height*0.050),
+            const Text(
+              StringRes.otp,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
+            SizedBox(height: Get.height * 0.050),
             Directionality(
               textDirection: TextDirection.ltr,
               child: Pinput(
@@ -63,7 +47,7 @@ Widget otpScreen() {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(bottom: 9),
-                      width: Get.width/6,
+                      width: Get.width / 6,
                       height: 1,
                       color: Colors.blueAccent,
                     ),
@@ -87,17 +71,27 @@ Widget otpScreen() {
                 ),
               ),
             ),
-            SizedBox(height: Get.height*0.050),
-            ButtonWidget(
-                text: StringRes.next,
-                textSize: 17,
-                textColor: Colors.white,
-                color: Colors.blue.shade600,
-                minHeight: Get.height*0.060,
-                onPressed: controller.validateOtpFunction,)
+            SizedBox(height: Get.height * 0.050),
+            otpSubmit(),
           ],
         ),
       ),
     ),
+  );
+}
+
+Widget otpSubmit() {
+  return GetBuilder<SignupController>(
+    id: "OtpVerification",
+    builder: (controller) {
+      return ButtonWidget(
+        text: StringRes.next,
+        textColor: Colors.white,
+        textSize: 17,
+        color: Colors.blue.shade600,
+        minHeight: Get.height * 0.060,
+        onPressed: () => controller.validateOtpFunction(),
+      );
+    },
   );
 }

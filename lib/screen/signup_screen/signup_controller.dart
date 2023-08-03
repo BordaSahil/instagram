@@ -83,6 +83,7 @@ class SignupController extends GetxController {
 
   void goToOtpPage() {
     otp();
+    update(["phoneSubmit"]);
     Get.to(() => const OtpPage());
   }
 
@@ -95,6 +96,7 @@ class SignupController extends GetxController {
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
+
   @override
   void onClose() {
     pinController.dispose();
@@ -114,15 +116,13 @@ class SignupController extends GetxController {
     ),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(19),
-      border: Border.all(
-      ),
+      border: Border.all(),
     ),
   );
 
-  void validateOtpFunction(){
+  void validateOtpFunction() {
     focusNode.unfocus();
     formKey.currentState!.validate();
     update(['OtpVerification']);
   }
-
 }

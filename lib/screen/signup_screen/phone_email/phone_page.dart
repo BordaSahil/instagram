@@ -55,6 +55,7 @@ Widget enterPhone() {
 
 Widget phoneSubmit() {
   return GetBuilder<SignupController>(
+    id: "phoneSubmit",
     builder: (controller) {
       return ButtonWidget(
         text: StringRes.next,
