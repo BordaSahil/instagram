@@ -46,7 +46,7 @@ Widget phoneSubmit() {
         textSize: 17,
         color: Colors.blue.shade600,
         minHeight: Get.height * 0.060,
-        onPressed: () {},
+        onPressed: () => controller.goToOtpPage(),
       );
     },
   );

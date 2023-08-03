@@ -39,4 +39,5 @@ class StringRes {
   static const email = "EMAIL";
   static const sms =
       'You may receive SMS notifications from us for security and login purposes.';
+  static const otp = "Enter OTP";
 }

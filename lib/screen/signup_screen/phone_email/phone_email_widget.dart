@@ -15,7 +15,7 @@ Widget tabBar() {
         horizontal: Get.width * 0.060, vertical: Get.height * 0.10),
     child: Column(
       children: [
-        Center(
+        const Center(
           child: Text(
             StringRes.chooseUserName,
             style: TextStyle(fontSize: 25, color: Colors.black),
@@ -28,7 +28,7 @@ Widget tabBar() {
         ),
         verticalSizeBox(Get.height * 0.025),
         verticalSizeBox(Get.height * 0.025),
-        TabBar(
+        const TabBar(
           labelColor: Colors.black,
           indicatorColor: Colors.blue,
           labelPadding: EdgeInsets.all(0),
@@ -37,12 +37,12 @@ Widget tabBar() {
           labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           tabs: [
             Tab(
-              text: "PHONE",
+              text: StringRes.phone,
             ),
-            Tab(text: "EMAIL"),
+            Tab(text: StringRes.email),
           ],
         ),
-        Expanded(
+        const Expanded(
           child: TabBarView(
             children: [
               PhonePage(),

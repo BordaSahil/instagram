@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
 
 import 'password_page/password_page.dart';
@@ -54,5 +55,9 @@ class SignupController extends GetxController {
     // await FireBaseServices.setData("userData", passwordSet);
     update(["password"]);
     Get.to(() => const AddPhoneOrEmail());
+  }
+
+  void goToOtpPage() {
+    Get.to(() => const OtpPage());
   }
 }
