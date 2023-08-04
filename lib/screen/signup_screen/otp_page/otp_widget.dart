@@ -18,12 +18,14 @@ Widget otpScreen() {
           children: [
             const Text(
               StringRes.otp,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
             SizedBox(height: Get.height * 0.050),
             Directionality(
               textDirection: TextDirection.ltr,
               child: Pinput(
+                pinAnimationType: PinAnimationType.rotation,
+                closeKeyboardWhenCompleted: true,
                 length: 6,
                 controller: controller.pinController,
                 focusNode: controller.focusNode,
@@ -55,14 +57,14 @@ Widget otpScreen() {
                 ),
                 focusedPinTheme: controller.defaultPinTheme.copyWith(
                   decoration: controller.defaultPinTheme.decoration!.copyWith(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: controller.focusedBorderColor),
                   ),
                 ),
                 submittedPinTheme: controller.defaultPinTheme.copyWith(
                   decoration: controller.defaultPinTheme.decoration!.copyWith(
                     color: controller.fillColor,
-                    borderRadius: BorderRadius.circular(19),
+                    borderRadius: BorderRadius.circular(25),
                     border: Border.all(color: controller.focusedBorderColor),
                   ),
                 ),

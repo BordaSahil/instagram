@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
 import 'package:instagram/services/firebase_service.dart';
 import 'package:pinput/pinput.dart';
-
 import 'password_page/password_page.dart';
 
 class SignupController extends GetxController {
@@ -24,6 +22,7 @@ class SignupController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   String? userNameError;
+
   void signupUserNameValidation(String? value) {
     if (value == null || value.isEmpty) {
       userNameError = "Please Enter Detail";
@@ -36,6 +35,7 @@ class SignupController extends GetxController {
   }
 
   String? passwordError;
+
   void signupPasswordValidation(String? value) {
     if (value == null || value.isEmpty) {
       passwordError = "Please Enter Password";
@@ -48,6 +48,7 @@ class SignupController extends GetxController {
   }
 
   String? mobileError;
+
   void signupMobile(String? value) {
     if (value == null || value.isEmpty) {
       mobileError = "Please Enter Mobile number";
@@ -60,6 +61,7 @@ class SignupController extends GetxController {
   }
 
   String? emailError;
+
   void signupEmailValidation(String? value) {
     if (value == null || value.isEmpty) {
       emailError = 'Please Enter Email';
@@ -113,14 +115,14 @@ class SignupController extends GetxController {
   Color fillColor = const Color.fromRGBO(243, 246, 249, 0);
 
   PinTheme defaultPinTheme = PinTheme(
-    width: 56,
-    height: 56,
+    width: 50,
+    height: 50,
     textStyle: const TextStyle(
-      fontSize: 22,
+      fontSize: 20,
       color: Color.fromRGBO(30, 60, 87, 1),
     ),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(19),
+      borderRadius: BorderRadius.circular(5),
       border: Border.all(),
     ),
   );

@@ -82,7 +82,7 @@ Widget checkBox() {
         id: "checkBox",
         builder: (controller) {
           return Checkbox(
-            fillColor: MaterialStatePropertyAll(Colors.green),
+            fillColor: const MaterialStatePropertyAll(Colors.green),
             value: controller.check,
             onChanged: (value) => controller.checkBox(),
           );

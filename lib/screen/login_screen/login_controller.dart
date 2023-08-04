@@ -24,6 +24,7 @@ class LoginController extends GetxController {
   ];
 
   String? phoneUserError;
+
   void loginPhoneUser(String? value) {
     if (value == null || value.isEmpty) {
       phoneUserError = "Please enter detail";
@@ -36,6 +37,7 @@ class LoginController extends GetxController {
   }
 
   String? passwordError;
+
   void loginPassword(String? value) {
     if (value == null || value.isEmpty) {
       passwordError = "Please Enter Password";
