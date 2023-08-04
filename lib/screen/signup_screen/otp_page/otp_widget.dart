@@ -37,6 +37,7 @@ Widget otpScreen() {
                 validator: (value) {
                   return value == value ? null : 'Pin is incorrect';
                 },
+                smsCodeMatcher: controller.otpSend,
                 hapticFeedbackType: HapticFeedbackType.lightImpact,
                 onCompleted: (pin) {
                   debugPrint('onCompleted: $pin');

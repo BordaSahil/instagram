@@ -26,7 +26,7 @@ Widget signupPageBody() {
         verticalSizeBox(Get.height * 0.025),
         userNameTextField(),
         verticalSizeBox(Get.height * 0.025),
-        nextButton()
+        userNameNextButton()
       ],
     ),
   );
@@ -57,7 +57,7 @@ Widget userNameTextField() {
   );
 }
 
-Widget nextButton() {
+Widget userNameNextButton() {
   return GetBuilder<SignupController>(
     id: "userValidation",
     builder: (controller) {
