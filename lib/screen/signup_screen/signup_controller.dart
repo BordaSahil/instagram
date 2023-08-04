@@ -125,7 +125,7 @@ class SignupController extends GetxController {
           if (matchSignupDetails == true) {
             Get.snackbar('User Already Signup', 'Please Log In');
           } else {
-            //getOtp();
+            otp();
             Get.to(() => const OtpPage());
           }
         }
@@ -134,90 +134,90 @@ class SignupController extends GetxController {
       }
       update(["phoneSubmit", "OtpPinPut"]);
     }
+  }
 
-    ///--------------------------------otp------------------------------///
-    Future<void> getOtp() async {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: "+91${signupPhone.text.trim()}",
-        verificationCompleted: (PhoneAuthCredential credential) async {},
-        verificationFailed: (FirebaseAuthException e) {},
-        codeSent: (String verificationId, int? resendToken) {},
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
-    }
-
-    @override
-    void onClose() {
-      pinController.dispose();
-      focusNode.dispose();
-      super.onClose();
-    }
-
-    Color focusedBorderColor = const Color.fromRGBO(23, 171, 144, 1);
-    Color fillColor = const Color.fromRGBO(243, 246, 249, 0);
-
-    PinTheme defaultPinTheme = PinTheme(
-      width: 50,
-      height: 50,
-      textStyle: const TextStyle(
-        fontSize: 20,
-        color: Color.fromRGBO(30, 60, 87, 1),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(),
-      ),
+  ///--------------------------------otp------------------------------///
+  Future<void> otp() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+91${signupPhone.text.trim()}",
+      verificationCompleted: (PhoneAuthCredential credential) async {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeSent: (String verificationId, int? resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
+  }
 
-    Future<void> validateOtpFunction() async {
-      focusNode.unfocus();
-      Map<String, dynamic> user = {
-        "name": signupUserName.text.trim(),
-        "phone": signupPhone.text.trim(),
-        "password": password.text.trim(),
-      };
-      if (formKey.currentState!.validate()) {
-        await FireBaseServices.setData('userData', user);
-        update(['OtpVerification']);
-        Get.offAll(() => const DashboardPage());
-      } else {
-        Get.snackbar('Otp Incorrect', "Please Enter Valid Otp");
-      }
+  @override
+  void onClose() {
+    pinController.dispose();
+    focusNode.dispose();
+    super.onClose();
+  }
+
+  Color focusedBorderColor = const Color.fromRGBO(23, 171, 144, 1);
+  Color fillColor = const Color.fromRGBO(243, 246, 249, 0);
+
+  PinTheme defaultPinTheme = PinTheme(
+    width: 50,
+    height: 50,
+    textStyle: const TextStyle(
+      fontSize: 20,
+      color: Color.fromRGBO(30, 60, 87, 1),
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      border: Border.all(),
+    ),
+  );
+
+  Future<void> validateOtpFunction() async {
+    focusNode.unfocus();
+    Map<String, dynamic> user = {
+      "name": signupUserName.text.trim(),
+      "phone": signupPhone.text.trim(),
+      "password": password.text.trim(),
+    };
+    if (formKey.currentState!.validate()) {
+      await FireBaseServices.setData('userData', user);
       update(['OtpVerification']);
+      Get.offAll(() => const DashboardPage());
+    } else {
+      Get.snackbar('Otp Incorrect', "Please Enter Valid Otp");
     }
+    update(['OtpVerification']);
+  }
 
-    Future<void> emailToGoHome() async {
-      Map? getAllData = await FireBaseServices.getData("userData");
-      List<Person>? userList;
-      List<Map<String, dynamic>> userJsonList = [];
-      Map<String, dynamic> user = {
-        "name": signupUserName.text.trim(),
-        "password": password.text.trim(),
-        "email": signupEmail.text.trim()
-      };
-      if (getAllData != null) {
-        getAllData.forEach((key, value) {
-          Map<String, dynamic> userData = {};
-          userData["id"] = key;
-          value.forEach((key1, value1) {
-            userData[key1] = value1;
-          });
-          userJsonList.add(userData);
+  Future<void> emailToGoHome() async {
+    Map? getAllData = await FireBaseServices.getData("userData");
+    List<Person>? userList;
+    List<Map<String, dynamic>> userJsonList = [];
+    Map<String, dynamic> user = {
+      "name": signupUserName.text.trim(),
+      "password": password.text.trim(),
+      "email": signupEmail.text.trim()
+    };
+    if (getAllData != null) {
+      getAllData.forEach((key, value) {
+        Map<String, dynamic> userData = {};
+        userData["id"] = key;
+        value.forEach((key1, value1) {
+          userData[key1] = value1;
         });
-        userList = userFromJson(jsonEncode(userJsonList));
-        bool matchSignupDetails =
-            userList.any((element) => element.email == signupEmail.text.trim());
-        if (matchSignupDetails == true) {
-          Get.snackbar('User Already Signup', 'Please Log In');
-        } else {
-          await FireBaseServices.setData('userData', user);
-          Get.offAll(() => const DashboardPage());
-        }
+        userJsonList.add(userData);
+      });
+      userList = userFromJson(jsonEncode(userJsonList));
+      bool matchSignupDetails =
+          userList.any((element) => element.email == signupEmail.text.trim());
+      if (matchSignupDetails == true) {
+        Get.snackbar('User Already Signup', 'Please Log In');
       } else {
         await FireBaseServices.setData('userData', user);
         Get.offAll(() => const DashboardPage());
       }
-      update(["emailSubmit"]);
+    } else {
+      await FireBaseServices.setData('userData', user);
+      Get.offAll(() => const DashboardPage());
     }
+    update(["emailSubmit"]);
   }
 }
