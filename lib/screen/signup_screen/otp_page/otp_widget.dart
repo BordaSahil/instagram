@@ -7,7 +7,7 @@ import 'package:pinput/pinput.dart';
 
 Widget otpScreen() {
   return GetBuilder<SignupController>(
-    id: 'OtpVerification',
+    id: 'OtpPinPut',
     builder: (controller) => Form(
       key: controller.formKey,
       child: Padding(
@@ -51,7 +51,6 @@ Widget otpScreen() {
                       margin: const EdgeInsets.only(bottom: 9),
                       width: Get.width / 6,
                       height: 1,
-                      color: Colors.blueAccent,
                     ),
                   ],
                 ),

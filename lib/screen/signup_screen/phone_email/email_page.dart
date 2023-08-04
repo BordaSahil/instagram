@@ -49,6 +49,7 @@ Widget enterEmail() {
 
 Widget emailSubmit() {
   return GetBuilder<SignupController>(
+    id: "emailSubmit",
     builder: (controller) {
       return ButtonWidget(
         text: StringRes.next,
@@ -56,7 +57,7 @@ Widget emailSubmit() {
         textSize: 17,
         color: Colors.blue.shade600,
         minHeight: Get.height * 0.060,
-        onPressed: () {},
+        onPressed: () => controller.emailToGoHome(),
       );
     },
   );

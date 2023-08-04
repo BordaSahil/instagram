@@ -21,6 +21,7 @@ class SignupController extends GetxController {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
+  ///---------------------------------user name------------------------///
   String? userNameError;
 
   void signupUserNameValidation(String? value) {
@@ -34,12 +35,13 @@ class SignupController extends GetxController {
     update(["userName"]);
   }
 
+  ///----------------------------password--------------------------------------///
   String? passwordError;
 
   void signupPasswordValidation(String? value) {
     if (value == null || value.isEmpty) {
       passwordError = "Please Enter Password";
-    } else if (!(value.length > 8)) {
+    } else if (!(value.length > 7)) {
       passwordError = "Enter password must be 8 character";
     } else {
       passwordError = null;
@@ -47,12 +49,13 @@ class SignupController extends GetxController {
     update(["password"]);
   }
 
+  ///--------------------------------------mobile---------------------------------///
   String? mobileError;
 
   void signupMobile(String? value) {
     if (value == null || value.isEmpty) {
       mobileError = "Please Enter Mobile number";
-    } else if (!(value.length == 10 && value.isNum)) {
+    } else if (!(value.length == 10 && value.isNumericOnly)) {
       mobileError = "Please Enter valid number";
     } else {
       passwordError = null;
@@ -60,6 +63,7 @@ class SignupController extends GetxController {
     update(["mobileValidation"]);
   }
 
+  ///-----------------------------------email---------------------------------------------------------///
   String? emailError;
 
   void signupEmailValidation(String? value) {
@@ -88,12 +92,36 @@ class SignupController extends GetxController {
     Get.to(() => const AddPhoneOrEmail());
   }
 
-  void goToOtpPage() {
-    otp();
+  Future<void> goToOtpPage() async {
+    Map? getAllData = await FireBaseServices.getData("userData");
+    List<Person>? userList;
+    List<Map<String, dynamic>> userJsonList = [];
+    if (getAllData != null) {
+      getAllData.forEach((key, value) {
+        Map<String, dynamic> userData = {};
+        userData["id"] = key;
+        value.forEach((key1, value1) {
+          userData[key1] = value1;
+        });
+        userJsonList.add(userData);
+      });
+      userList = userFromJson(jsonEncode(userJsonList));
+      bool matchSignupDetails = userList
+          .any((element) => element.mobileNumber == signupPhone.text.trim());
+      if (matchSignupDetails == true) {
+        Get.snackbar('User Already Signup', 'Please Log In');
+      } else {
+        otp();
+        Get.to(() => const OtpPage());
+      }
+    } else {
+      otp();
+      Get.to(() => const OtpPage());
+    }
     update(["phoneSubmit"]);
-    Get.to(() => const OtpPage());
   }
 
+  ///--------------------------------otp------------------------------///
   Future<void> otp() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: "+91${signupPhone.text.trim()}",
@@ -133,35 +161,48 @@ class SignupController extends GetxController {
       "name": signupUserName.text.trim(),
       "phone": signupPhone.text.trim(),
       "password": password.text.trim(),
-      "email": signupEmail.text.trim()
     };
+    if (formKey.currentState!.validate()) {
+      await FireBaseServices.setData('userData', user);
+      update(['OtpVerification']);
+      Get.offAll(() => const DashboardPage());
+    } else {
+      Get.snackbar('Otp Incorrect', "Please Enter Valid Otp");
+    }
+    update(['OtpVerification']);
+  }
+
+  Future<void> emailToGoHome() async {
     Map? getAllData = await FireBaseServices.getData("userData");
     List<Person>? userList;
     List<Map<String, dynamic>> userJsonList = [];
-    if (formKey.currentState!.validate()) {
-      if (getAllData != null) {
-        getAllData.forEach((key, value) {
-          Map<String, dynamic> userData = {};
-          userData["id"] = key;
-          value.forEach((key1, value1) {
-            userData[key1] = value1;
-          });
-          userJsonList.add(userData);
+    Map<String, dynamic> user = {
+      "name": signupUserName.text.trim(),
+      "password": password.text.trim(),
+      "email": signupEmail.text.trim()
+    };
+    if (getAllData != null) {
+      getAllData.forEach((key, value) {
+        Map<String, dynamic> userData = {};
+        userData["id"] = key;
+        value.forEach((key1, value1) {
+          userData[key1] = value1;
         });
-        userList = userFromJson(jsonEncode(userJsonList));
-        bool matchSignupDetails = userList.any((element) =>
-            element.email == signupEmail.text ||
-            element.mobileNumber == signupPhone.text);
-        if (matchSignupDetails == true) {
-          Get.snackbar('SignUp Failed', 'User Already Signup');
-        }
+        userJsonList.add(userData);
+      });
+      userList = userFromJson(jsonEncode(userJsonList));
+      bool matchSignupDetails =
+          userList.any((element) => element.email == signupEmail.text.trim());
+      if (matchSignupDetails == true) {
+        Get.snackbar('User Already Signup', 'Please Log In');
       } else {
         await FireBaseServices.setData('userData', user);
         Get.offAll(() => const DashboardPage());
       }
     } else {
-      Get.snackbar('Signup Error', "Please Enter Valid Detail");
+      await FireBaseServices.setData('userData', user);
+      Get.offAll(() => const DashboardPage());
     }
-    update(['OtpVerification']);
+    update(["emailSubmit"]);
   }
 }

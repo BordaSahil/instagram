@@ -69,8 +69,10 @@ class LoginController extends GetxController {
       });
       userList = userFromJson(jsonEncode(userJsonList));
       bool matchEmailPassword = userList.any((element) =>
-          element.userName == userName.text &&
-          element.password == password.text);
+          element.email == userName.text ||
+          element.userName == userName.text ||
+          element.mobileNumber == userName.text &&
+              element.password == password.text);
       if (matchEmailPassword) {
         Get.offAll(() => const DashboardPage());
       } else {
