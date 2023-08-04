@@ -62,6 +62,7 @@ Widget passwordTextField() {
 
 Widget nextPassword() {
   return GetBuilder<SignupController>(
+    id: "passwordValid",
     builder: (controller) {
       return ButtonWidget(
         text: StringRes.next,
@@ -69,7 +70,7 @@ Widget nextPassword() {
         textSize: 17,
         minHeight: Get.height * 0.060,
         color: Colors.blue.shade600,
-        onPressed: () => controller.goToHome(),
+        onPressed: () => controller.goToPhoneEmail(),
       );
     },
   );

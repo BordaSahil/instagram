@@ -59,6 +59,7 @@ Widget userNameTextField() {
 
 Widget nextButton() {
   return GetBuilder<SignupController>(
+    id: "userValidation",
     builder: (controller) {
       return ButtonWidget(
         text: StringRes.next,

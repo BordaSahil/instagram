@@ -83,40 +83,53 @@ class SignupController extends GetxController {
   }
 
   Future<void> goToPassword() async {
-    update(["userName"]);
-    Get.to(() => const PasswordScreen());
+    if (userNameError != null || signupUserName.text.isEmpty) {
+      Get.snackbar("userName", "Please enter username");
+    } else {
+      Get.to(() => const PasswordScreen());
+    }
+    update(["userValidation"]);
   }
 
-  Future<void> goToHome() async {
-    update(["password"]);
-    Get.to(() => const AddPhoneOrEmail());
+  Future<void> goToPhoneEmail() async {
+    if (passwordError != null || password.text.isEmpty) {
+      Get.snackbar("Password", "Please enter password");
+    } else {
+      Get.to(() => const AddPhoneOrEmail());
+    }
+    update(["passwordValid"]);
   }
 
   Future<void> goToOtpPage() async {
-    Map? getAllData = await FireBaseServices.getData("userData");
-    List<Person>? userList;
-    List<Map<String, dynamic>> userJsonList = [];
-    if (getAllData != null) {
-      getAllData.forEach((key, value) {
-        Map<String, dynamic> userData = {};
-        userData["id"] = key;
-        value.forEach((key1, value1) {
-          userData[key1] = value1;
+    if(mobileError!=null||signupPhone.text.isEmpty){
+      Map? getAllData = await FireBaseServices.getData("userData");
+      List<Person>? userList;
+      List<Map<String, dynamic>> userJsonList = [];
+      if (getAllData != null) {
+        getAllData.forEach((key, value) {
+          Map<String, dynamic> userData = {};
+          userData["id"] = key;
+          value.forEach((key1, value1) {
+            userData[key1] = value1;
+          });
+          userJsonList.add(userData);
         });
-        userJsonList.add(userData);
-      });
-      userList = userFromJson(jsonEncode(userJsonList));
-      bool matchSignupDetails = userList
-          .any((element) => element.mobileNumber == signupPhone.text.trim());
-      if (matchSignupDetails == true) {
-        Get.snackbar('User Already Signup', 'Please Log In');
+        userList = userFromJson(jsonEncode(userJsonList));
+        bool matchSignupDetails = userList
+            .any((element) => element.mobileNumber == signupPhone.text.trim());
+        if (matchSignupDetails == true) {
+          Get.snackbar('User Already Signup', 'Please Log In');
+        } else {
+          otp();
+          Get.to(() => const OtpPage());
+        }
       } else {
         otp();
         Get.to(() => const OtpPage());
       }
-    } else {
-      otp();
-      Get.to(() => const OtpPage());
+    }
+    else{
+      Get.snackbar("Error", "Please Enter Mobile Number");
     }
     update(["phoneSubmit"]);
   }
