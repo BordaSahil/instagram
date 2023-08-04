@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:instagram/model/user_model.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/signup_page.dart';
+import 'package:instagram/services/firebase_service.dart';
 
 class LoginController extends GetxController {
   TextEditingController userName = TextEditingController();
@@ -48,9 +52,30 @@ class LoginController extends GetxController {
     update(["dropdown"]);
   }
 
-  void goToHomeScreen() {
+  Future<void> goToHomeScreen() async {
+    Map? getUserData = await FireBaseServices.getData("userData");
+    List<Person>? userList;
+    List<Map<String, dynamic>> userJsonList = [];
+    if (getUserData != null) {
+      getUserData.forEach((key, value) {
+        Map<String, dynamic> userData = {};
+        userData["id"] = key;
+        value.forEach((key1, value1) {
+          userData[key1] = value1;
+        });
+        userJsonList.add(userData);
+      });
+      userList = userFromJson(jsonEncode(userJsonList));
+      bool matchEmailPassword = userList.any((element) =>
+          element.userName == userName.text &&
+          element.password == password.text);
+      if (matchEmailPassword) {
+        Get.offAll(() => const DashboardPage());
+      } else {
+        Get.snackbar("Login Error", "Please Enter Valid Details");
+      }
+    }
     update(["phoneUser", "passwordValid"]);
-    Get.off(() => const DashboardPage());
   }
 
   void goToSignup() {

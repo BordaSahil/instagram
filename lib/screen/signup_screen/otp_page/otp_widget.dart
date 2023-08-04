@@ -33,7 +33,7 @@ Widget otpScreen() {
                 defaultPinTheme: controller.defaultPinTheme,
                 separatorBuilder: (index) => const SizedBox(width: 8),
                 validator: (value) {
-                  return value == '222222' ? null : 'Pin is incorrect';
+                  return value == value ? null : 'Pin is incorrect';
                 },
                 hapticFeedbackType: HapticFeedbackType.lightImpact,
                 onCompleted: (pin) {

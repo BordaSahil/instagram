@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram/model/user_model.dart';
+import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
+import 'package:instagram/services/firebase_service.dart';
 import 'package:pinput/pinput.dart';
 
 import 'password_page/password_page.dart';
@@ -46,7 +51,7 @@ class SignupController extends GetxController {
   void signupMobile(String? value) {
     if (value == null || value.isEmpty) {
       mobileError = "Please Enter Mobile number";
-    } else if (!(value.isPhoneNumber)) {
+    } else if (!(value.length == 10 && value.isNum)) {
       mobileError = "Please Enter valid number";
     } else {
       passwordError = null;
@@ -89,7 +94,7 @@ class SignupController extends GetxController {
 
   Future<void> otp() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: signupPhone.text.trim(),
+      phoneNumber: "+91${signupPhone.text.trim()}",
       verificationCompleted: (PhoneAuthCredential credential) async {},
       verificationFailed: (FirebaseAuthException e) {},
       codeSent: (String verificationId, int? resendToken) {},
@@ -120,9 +125,41 @@ class SignupController extends GetxController {
     ),
   );
 
-  void validateOtpFunction() {
+  Future<void> validateOtpFunction() async {
     focusNode.unfocus();
-    formKey.currentState!.validate();
+    Map<String, dynamic> user = {
+      "name": signupUserName.text.trim(),
+      "phone": signupPhone.text.trim(),
+      "password": password.text.trim(),
+      "email": signupEmail.text.trim()
+    };
+    Map? getAllData = await FireBaseServices.getData("userData");
+    List<Person>? userList;
+    List<Map<String, dynamic>> userJsonList = [];
+    if (formKey.currentState!.validate()) {
+      if (getAllData != null) {
+        getAllData.forEach((key, value) {
+          Map<String, dynamic> userData = {};
+          userData["id"] = key;
+          value.forEach((key1, value1) {
+            userData[key1] = value1;
+          });
+          userJsonList.add(userData);
+        });
+        userList = userFromJson(jsonEncode(userJsonList));
+        bool matchSignupDetails = userList.any((element) =>
+            element.email == signupEmail.text ||
+            element.mobileNumber == signupPhone.text);
+        if (matchSignupDetails == true) {
+          Get.snackbar('SignUp Failed', 'User Already Signup');
+        }
+      } else {
+        await FireBaseServices.setData('userData', user);
+        Get.offAll(() => const DashboardPage());
+      }
+    } else {
+      Get.snackbar('Signup Error', "Please Enter Valid Detail");
+    }
     update(['OtpVerification']);
   }
 }
