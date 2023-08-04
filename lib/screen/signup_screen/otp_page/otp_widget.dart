@@ -21,57 +21,13 @@ Widget otpScreen() {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
             SizedBox(height: Get.height * 0.050),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: Pinput(
-                pinAnimationType: PinAnimationType.rotation,
-                closeKeyboardWhenCompleted: true,
-                length: 6,
-                controller: controller.pinController,
-                focusNode: controller.focusNode,
-                androidSmsAutofillMethod:
-                    AndroidSmsAutofillMethod.smsUserConsentApi,
-                listenForMultipleSmsOnAndroid: true,
-                defaultPinTheme: controller.defaultPinTheme,
-                separatorBuilder: (index) => const SizedBox(width: 8),
-                validator: (value) {
-                  return value == value ? null : 'Pin is incorrect';
-                },
-                smsCodeMatcher: controller.otpSend,
-                hapticFeedbackType: HapticFeedbackType.lightImpact,
-                onCompleted: (pin) {
-                  debugPrint('onCompleted: $pin');
-                },
-                onChanged: (value) {
-                  debugPrint('onChanged: $value');
-                },
-                cursor: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 9),
-                      width: Get.width / 6,
-                      height: 1,
-                    ),
-                  ],
-                ),
-                focusedPinTheme: controller.defaultPinTheme.copyWith(
-                  decoration: controller.defaultPinTheme.decoration!.copyWith(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: controller.focusedBorderColor),
-                  ),
-                ),
-                submittedPinTheme: controller.defaultPinTheme.copyWith(
-                  decoration: controller.defaultPinTheme.decoration!.copyWith(
-                    color: controller.fillColor,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: controller.focusedBorderColor),
-                  ),
-                ),
-                errorPinTheme: controller.defaultPinTheme.copyBorderWith(
-                  border: Border.all(color: Colors.redAccent),
-                ),
-              ),
+            Pinput(
+              controller: controller.pinController,
+              length: 6,
+              showCursor: false,
+              onChanged: (value) {
+                controller.varifiy = value;
+              },
             ),
             SizedBox(height: Get.height * 0.050),
             otpSubmit(),

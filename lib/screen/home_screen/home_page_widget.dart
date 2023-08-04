@@ -139,7 +139,7 @@ Widget multiImage() {
                     padding: const EdgeInsets.only(
                         left: 12, right: 12, top: 8, bottom: 8),
                     child: Text(
-                      "${controller.selectedIndex}/6",
+                      "${controller.selectedIndex + 1}/7",
                       style: const TextStyle(color: ColorsRes.white),
                     ),
                   ),

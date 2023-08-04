@@ -15,7 +15,7 @@ class HomeController extends GetxController {
   late VideoPlayerController controller;
   int selectedIndex = 0;
 
- static List searchBarList = [
+  static List searchBarList = [
     "Roshan",
     "Sahil",
     "Axay",
@@ -36,7 +36,7 @@ class HomeController extends GetxController {
     update(["pageView", "count"]);
   }
 
-  //-----------------like***************
+  //-----------------like
   void redHart() {
     hart = !hart;
     update(["roshan"]);
