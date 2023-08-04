@@ -17,7 +17,7 @@ AppBar homePageAppBar() {
     elevation: 0,
     leading: Image.asset(
       AssetRes.instagramLogo,
-      scale: 3.5,
+      scale: 4,
     ),
     title: AnimatedSearchBar(
       shadow: const [
@@ -37,16 +37,11 @@ AppBar homePageAppBar() {
       duration: const Duration(milliseconds: 1000),
       submitIcon: const Icon(Icons.cancel),
       animationAlignment: AnimationAlignment.left,
-      onSubmit: () {
-        /* setState(() {
-            value = textController.text;
-          });*/
-      },
+      onSubmit: () {},
       searchList: HomeController.searchBarList,
       searchQueryBuilder: (query, list) => list.where((item) {
         return item!.toString().toLowerCase().contains(query.toLowerCase());
       }).toList(),
-      // textController: textController,
       overlaySearchListItemBuilder: (dynamic item) => Container(
         padding: const EdgeInsets.all(8),
         child: Text(
@@ -54,11 +49,6 @@ AppBar homePageAppBar() {
           style: const TextStyle(fontSize: 15, color: Colors.black),
         ),
       ),
-      /* onItemSelected: (dynamic item) {
-          textController.value = textController.value.copyWith(
-            text: item.toString(),
-          );
-        },*/
       overlaySearchListHeight: 100,
     ),
     actions: [
@@ -157,7 +147,10 @@ Widget multiImage() {
           },
         ),
         const Positioned(
-            bottom: 5, left: 5, child: Icon(Icons.account_circle, size: 30))
+          bottom: 5,
+          left: 5,
+          child: Icon(Icons.account_circle, size: 30),
+        ),
       ],
     ),
   );
@@ -345,6 +338,30 @@ Widget commentText() {
   );
 }
 
+
+
+/*Widget profileStory() {
+  return Center(
+    child: Stack(clipBehavior: Clip.none, children: [
+      const CircleAvatar(
+        radius: 40,
+        backgroundImage: AssetImage(AssetRes.sudhir),
+      ),
+      Positioned(
+        right: 0,
+        bottom: 4,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.black, width: 1),
+          ),
+          child: const Icon(Icons.add, color: Colors.white, size: 18),
+        ),
+      ),
+    ]),
+  );
+}
 Widget story() {
   return SizedBox(
     height: Get.height * 0.15,
@@ -394,27 +411,6 @@ Widget story() {
       },
     ),
   );
-}
+}*/
 
-Widget profileStory() {
-  return Center(
-    child: Stack(clipBehavior: Clip.none, children: [
-      const CircleAvatar(
-        radius: 40,
-        backgroundImage: AssetImage(AssetRes.sudhir),
-      ),
-      Positioned(
-        right: 0,
-        bottom: 4,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            shape: BoxShape.circle,
-            border: Border.all(color: Colors.black, width: 1),
-          ),
-          child: const Icon(Icons.add, color: Colors.white, size: 18),
-        ),
-      ),
-    ]),
-  );
-}
+

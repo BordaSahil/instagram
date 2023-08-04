@@ -1,16 +1,15 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:instagram/model/user_model.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
 import 'package:instagram/services/firebase_service.dart';
-import 'package:pinput/pinput.dart';
-
 import 'password_page/password_page.dart';
+import 'package:pinput/pinput.dart';
 
 class SignupController extends GetxController {
   bool check = false;

@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:instagram/utils/asset_res.dart';
+import 'package:instagram/utils/string_res.dart';
 import 'package:instagram/common/common_button.dart';
 import 'package:instagram/common/common_size_box.dart';
 import 'package:instagram/common/common_textField.dart';
 import 'package:instagram/screen/login_screen/login_controller.dart';
-import 'package:instagram/utils/asset_res.dart';
-import 'package:instagram/utils/string_res.dart';
 
 Widget loginScreenBody() {
   return SingleChildScrollView(
@@ -21,8 +21,9 @@ Widget loginScreenBody() {
               dropdownButton(),
               verticalSizeBox(Get.height * 0.15),
               SizedBox(
-                  height: Get.height * 0.060,
-                  child: Image.asset(AssetRes.instagramText)),
+                height: Get.height * 0.060,
+                child: Image.asset(AssetRes.instagramText),
+              ),
               verticalSizeBox(Get.height * 0.040),
               userNameTextField(),
               verticalSizeBox(Get.height * 0.015),
@@ -92,10 +93,10 @@ Widget passwordTextField() {
           ),
           verticalSizeBox(Get.height * 0.0050),
           controller.passwordError == null
-              ? SizedBox()
+              ? const SizedBox()
               : Text(
                   controller.passwordError!,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 )
         ],
       );
@@ -210,14 +211,15 @@ Widget signupRow() {
       GetBuilder<LoginController>(
         builder: (controller) {
           return TextButton(
-              onPressed: () => controller.goToSignup(),
-              child: Text(
-                StringRes.signup,
-                style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.indigo.shade900,
-                    fontWeight: FontWeight.bold),
-              ));
+            onPressed: () => controller.goToSignup(),
+            child: Text(
+              StringRes.signup,
+              style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.indigo.shade900,
+                  fontWeight: FontWeight.bold),
+            ),
+          );
         },
       )
     ],
