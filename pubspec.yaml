@@ -52,7 +52,8 @@ dependencies:
   search_bar_animated: ^1.0.2
   pinput: ^2.4.0
   firebase_auth:
-  shared_preferences:   
+  shared_preferences:
+  image_picker: ^1.0.2
 
 
 dev_dependencies:

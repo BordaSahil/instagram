@@ -10,7 +10,7 @@ class AddScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(AddController());
     return Scaffold(
-      body: addBody(),
+      appBar: addPostAppBar,
     );
   }
 }

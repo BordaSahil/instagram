@@ -18,7 +18,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
       onItemSelected: (index) => controller.onTapNavigation(index),
       items: [
         FlashyTabBarItem(
-          icon: iconBottom(Icons.home),
+          icon: iconBottom(onPressed: (){},icon:Icons.home),
           title: Text(
             'Home',
             style: TextStyle(
@@ -28,7 +28,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon: iconBottom(Icons.search),
+          icon: iconBottom(onPressed: (){},icon:Icons.search),
           title: Text(
             'Search',
             style: TextStyle(
@@ -38,7 +38,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon: iconBottom(Icons.add_box_outlined),
+          icon: iconBottom(onPressed: (){},icon:Icons.add_box_outlined),
           title: Text(
             'Add',
             style: TextStyle(
@@ -48,7 +48,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon: iconBottom(Icons.favorite_border_rounded),
+          icon: iconBottom(onPressed: (){},icon: Icons.favorite_border_rounded),
           title: Text(
             'Favorite',
             style: TextStyle(
@@ -58,7 +58,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon: iconBottom(Icons.person),
+          icon: iconBottom(onPressed: ()=> controller.addNewPhoto(),icon: Icons.person),
           title: Text(
             'Profile',
             style: TextStyle(
@@ -72,10 +72,10 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
   },
 );
 
-Widget iconBottom(IconData icon) {
+Widget iconBottom({required void Function()? onPressed,IconData? icon}) {
   return ShaderMask(
     blendMode: BlendMode.srcIn,
     shaderCallback: (Rect bounds) => const RadialGradient(colors: ColorsRes.colorList).createShader(bounds),
-    child: Icon(icon, size: 30),
+    child: iconBottom(onPressed: onPressed,icon: icon),
   );
 }

@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinput/pinput.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'password_page/password_page.dart';
 import 'package:instagram/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:instagram/services/pref_service.dart';
+import 'package:instagram/services/firebase_service.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
-import 'package:instagram/services/firebase_service.dart';
-import 'package:instagram/services/pref_service.dart';
-import 'package:pinput/pinput.dart';
-
-import 'password_page/password_page.dart';
 
 class SignupController extends GetxController {
   bool check = false;
@@ -161,8 +161,10 @@ class SignupController extends GetxController {
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      if (kDebugMode) {
+        print(error);
+      }
     }
   }
 
@@ -198,7 +200,9 @@ class SignupController extends GetxController {
       await PrefService.setValue("isPhoneSignup", true);
       Get.offAll(() => const DashboardPage());
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
       Get.snackbar('Otp Incorrect', "Please Enter Valid Otp");
     }
     update(['OtpVerification']);

@@ -62,7 +62,7 @@ Widget homePageBody() {
   return ListView(
     physics: const BouncingScrollPhysics(),
     children: [
-      // story(),
+      story(),
       post(AssetRes.vishal, StringRes.vishal, StringRes.vishalSub),
       multiImage(),
       vishalRow(),
@@ -338,9 +338,7 @@ Widget commentText() {
   );
 }
 
-
-
-/*Widget profileStory() {
+Widget profileStory() {
   return Center(
     child: Stack(clipBehavior: Clip.none, children: [
       const CircleAvatar(
@@ -411,6 +409,6 @@ Widget story() {
       },
     ),
   );
-}*/
+}
 
 

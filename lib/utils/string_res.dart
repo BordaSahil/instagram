@@ -8,6 +8,8 @@ class StringRes {
   static const newUser = "Don't have an account?";
   static const signup = "Sign up.";
   static const or = "OR";
+  static const newPost = "New Post";
+  static const post = "Post";
   static const chooseUserName = "Choose username";
   static const changeItLater = " You can always change it later";
   static const userName = "UserName";
