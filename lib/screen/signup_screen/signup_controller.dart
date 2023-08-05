@@ -1,15 +1,17 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram/model/user_model.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/otp_page/otp_page.dart';
 import 'package:instagram/screen/signup_screen/phone_email/phone_email_page.dart';
 import 'package:instagram/services/firebase_service.dart';
-import 'password_page/password_page.dart';
+import 'package:instagram/services/pref_service.dart';
 import 'package:pinput/pinput.dart';
+
+import 'password_page/password_page.dart';
 
 class SignupController extends GetxController {
   bool check = false;
@@ -193,6 +195,7 @@ class SignupController extends GetxController {
         "password": password.text.trim(),
       };
       await FireBaseServices.setData('userData', user);
+      await PrefService.setValue("isPhoneSignup", true);
       Get.offAll(() => const DashboardPage());
     } catch (e) {
       print(e);
@@ -230,6 +233,7 @@ class SignupController extends GetxController {
           Get.snackbar("Email Error", "Please Enter valid Email");
         } else {
           await FireBaseServices.setData('userData', user);
+          await PrefService.setValue("isEmailSignup", true);
           Get.offAll(() => const DashboardPage());
         }
       }
@@ -238,6 +242,7 @@ class SignupController extends GetxController {
         Get.snackbar("Email Error", "Please Enter valid Email");
       } else {
         await FireBaseServices.setData('userData', user);
+        await PrefService.setValue("isEmailSignup", true);
         Get.offAll(() => const DashboardPage());
       }
     }

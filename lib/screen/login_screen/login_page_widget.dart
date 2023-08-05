@@ -1,11 +1,11 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/utils/asset_res.dart';
-import 'package:instagram/utils/string_res.dart';
+import 'package:get/get.dart';
 import 'package:instagram/common/common_button.dart';
 import 'package:instagram/common/common_size_box.dart';
 import 'package:instagram/common/common_textField.dart';
 import 'package:instagram/screen/login_screen/login_controller.dart';
+import 'package:instagram/utils/asset_res.dart';
+import 'package:instagram/utils/string_res.dart';
 
 Widget loginScreenBody() {
   return SingleChildScrollView(
@@ -63,16 +63,9 @@ Widget userNameTextField() {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           commonTextFiled(
-              controller: controller.userName,
-              text: StringRes.phoneEmailUserName,
-              onChanged: (value) => controller.loginPhoneUser(value)),
-          verticalSizeBox(Get.height * 0.0050),
-          controller.phoneUserError == null
-              ? const SizedBox()
-              : Text(
-                  controller.phoneUserError!,
-                  style: const TextStyle(color: Colors.red),
-                ),
+            controller: controller.userName,
+            text: StringRes.phoneEmailUserName,
+          ),
         ],
       );
     },

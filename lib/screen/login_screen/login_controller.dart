@@ -6,6 +6,7 @@ import 'package:instagram/model/user_model.dart';
 import 'package:instagram/screen/dashboard_screen/dashboard_page.dart';
 import 'package:instagram/screen/signup_screen/signup_page.dart';
 import 'package:instagram/services/firebase_service.dart';
+import 'package:instagram/services/pref_service.dart';
 
 class LoginController extends GetxController {
   TextEditingController userName = TextEditingController();
@@ -22,18 +23,6 @@ class LoginController extends GetxController {
     "Turkish",
     "Polski",
   ];
-
-  String? phoneUserError;
-  void loginPhoneUser(String? value) {
-    if (value == null || value.isEmpty) {
-      phoneUserError = "Please enter detail";
-    } else if (!(value.isEmail)) {
-      phoneUserError = "Enter valid email";
-    } else {
-      phoneUserError = null;
-    }
-    update(["phoneUser"]);
-  }
 
   String? passwordError;
   void loginPassword(String? value) {
@@ -72,6 +61,7 @@ class LoginController extends GetxController {
           element.mobileNumber == userName.text &&
               element.password == password.text);
       if (matchEmailPassword) {
+        await PrefService.setValue("isLogin", true);
         Get.offAll(() => const DashboardPage());
       } else {
         Get.snackbar("Login Error", "Please Enter Valid Details");

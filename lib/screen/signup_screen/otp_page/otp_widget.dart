@@ -8,31 +8,28 @@ import 'package:pinput/pinput.dart';
 Widget otpScreen() {
   return GetBuilder<SignupController>(
     id: 'OtpPinPut',
-    builder: (controller) => Form(
-      key: controller.formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.060),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              StringRes.otp,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-            ),
-            SizedBox(height: Get.height * 0.050),
-            Pinput(
-              controller: controller.pinController,
-              length: 6,
-              showCursor: false,
-              onChanged: (value) {
-                controller.varifiy = value;
-              },
-            ),
-            SizedBox(height: Get.height * 0.050),
-            otpSubmit(),
-          ],
-        ),
+    builder: (controller) => Padding(
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.060),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            StringRes.otp,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          ),
+          SizedBox(height: Get.height * 0.050),
+          Pinput(
+            controller: controller.pinController,
+            length: 6,
+            showCursor: false,
+            onChanged: (value) {
+              controller.varifiy = value;
+            },
+          ),
+          SizedBox(height: Get.height * 0.050),
+          otpSubmit(),
+        ],
       ),
     ),
   );
