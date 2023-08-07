@@ -18,7 +18,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
       onItemSelected: (index) => controller.onTapNavigation(index),
       items: [
         FlashyTabBarItem(
-          icon: iconBottom(onPressed: () {}, icon: Icons.home),
+          icon: iconBottom(icon: Icons.home),
           title: Text(
             'Home',
             style: TextStyle(
@@ -38,7 +38,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon: iconBottom(onPressed: () {}, icon: Icons.add_box_outlined),
+          icon: iconBottom(onPressed: (){},icon:Icons.add_box_outlined),
           title: Text(
             'Add',
             style: TextStyle(
@@ -48,8 +48,7 @@ Widget bottomNavigationBar = GetBuilder<DashboardController>(
           ),
         ),
         FlashyTabBarItem(
-          icon:
-              iconBottom(onPressed: () {}, icon: Icons.favorite_border_rounded),
+          icon: iconBottom(onPressed: (){},icon: Icons.favorite_border_rounded),
           title: Text(
             'Favorite',
             style: TextStyle(

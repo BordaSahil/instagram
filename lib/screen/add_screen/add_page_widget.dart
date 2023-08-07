@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram/utils/string_res.dart';
 import 'package:instagram/common/common_button.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:instagram/screen/add_screen/add_controller.dart';
+import 'package:instagram/utils/string_res.dart';
 
 AppBar addPostAppBar = AppBar(
   backgroundColor: Colors.white,
@@ -22,39 +24,33 @@ AppBar addPostAppBar = AppBar(
     style: TextStyle(color: Colors.black),
   ),
   actions: [
-    TextButton(
-      onPressed: () {},
-      child: const Text(
-        StringRes.post,
-        style: TextStyle(color: Colors.blueAccent, fontSize: 20),
-      ),
-    ),
+    GetBuilder<AddController>(
+      id: "postDone",
+      builder: (controller) {
+        return TextButton(
+          onPressed: () => controller.imagePost(),
+          child: const Text(
+            StringRes.post,
+            style: TextStyle(color: Colors.blueAccent, fontSize: 20),
+          ),
+        );
+      },
+    )
   ],
 );
 
-/*
-Widget imagePick() {
-  return GetBuilder<AddController>(
-    id: "imageGallery",
-    builder: (controller) => Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: InkWell(
-        onTap: () => controller.imagePickerGallery(),
-        child: CircleAvatar(
-          radius: 60,
-          child: controller.image != null
-              ? CircleAvatar(
-                  radius: 60,
-                  backgroundImage: FileImage(controller.image!),
-                )
-              : null,
-        ),
-      ),
+Widget addPostBody() {
+  return Center(
+    child: GetBuilder<AddController>(
+      id: "dialogBox",
+      builder: (controller) {
+        return ElevatedButton(
+            onPressed: () {
+              controller.dialogBox();
+            },
+            child: const Text("Choose Image"));
+      },
     ),
-  );
-}
-*/
-
 Widget addNewPostGallery() {
   return GetBuilder<AddController>(
     id: 'Gallery',
@@ -80,3 +76,4 @@ Widget addNewPostCamera() {
     ),
   );
 }
+

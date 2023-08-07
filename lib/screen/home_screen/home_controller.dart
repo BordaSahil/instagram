@@ -10,7 +10,6 @@ class HomeController extends GetxController {
   bool vHart = false;
   bool book = false;
   bool vBook = false;
-
   late final PageController pageController;
   late VideoPlayerController controller;
   int selectedIndex = 0;
@@ -36,7 +35,7 @@ class HomeController extends GetxController {
     update(["pageView", "count"]);
   }
 
-  //-----------------like
+  //-----------------like------------------------//
   void redHart() {
     hart = !hart;
     update(["roshan"]);
@@ -52,7 +51,7 @@ class HomeController extends GetxController {
     update(["akshay"]);
   }
 
-  //----------------------book---------------------
+  //----------------------book----------------------//
   void bookMark() {
     book = !book;
     update(["roshan"]);
