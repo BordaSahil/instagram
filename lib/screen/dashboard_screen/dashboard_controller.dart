@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/screen/add_screen/add_page.dart';
-import 'package:instagram/screen/add_screen/add_page_widget.dart';
 import 'package:instagram/screen/favorite_screen/favorite_page.dart';
 import 'package:instagram/screen/home_screen/home_page.dart';
 import 'package:instagram/screen/profile_screen/profile_page.dart';
@@ -33,11 +32,4 @@ class DashboardController extends GetxController {
     currentIndex = index;
     update(["bottomNavigation"]);
   }
-
-  void addNewPhoto(){
-    addNewPostGallery();
-    addNewPostCamera();
-    update(['bottomNavigation']);
-  }
-
 }

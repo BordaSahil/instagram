@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:instagram/common/common_size_box.dart';
+import 'package:instagram/screen/add_screen/add_controller.dart';
 import 'package:instagram/screen/home_screen/home_controller.dart';
 import 'package:instagram/utils/asset_res.dart';
 import 'package:instagram/utils/color_res.dart';
@@ -73,11 +74,12 @@ Widget homePageBody() {
       akshayRow(),
       readMoreRow(),
       commentText(),
-      post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
-      roshan(),
-      roshanRow(),
-      readMoreRow(),
-      commentText(),
+      postList(),
+      //post(AssetRes.roshan, StringRes.roshan, StringRes.roshanSub),
+      // roshan(),
+      //roshanRow(),
+      //readMoreRow(),
+      // commentText(),
     ],
   );
 }
@@ -95,6 +97,23 @@ Widget roshan() {
         onComment: (p0) {},
       ),
     ),
+  );
+}
+
+Widget postList() {
+  return GetBuilder<AddController>(
+    id: "postList",
+    builder: (controller) {
+      return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: controller.imageList?.length,
+        itemBuilder: (context, index) {
+          return controller.imageList != null
+              ? Image.file(controller.imageList![index])
+              : const SizedBox();
+        },
+      );
+    },
   );
 }
 
@@ -256,7 +275,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
       GetBuilder<HomeController>(
         builder: (controller) {
           return GestureDetector(
-            onTap: () => controller.openBottomSheet(),
+            onTap: () {},
             child: IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -270,7 +289,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
       GetBuilder<HomeController>(
         builder: (controller) {
           return GestureDetector(
-            onTap: () => controller.openBottomSheetHome(),
+            onTap: () {},
             child: IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -360,6 +379,7 @@ Widget profileStory() {
     ]),
   );
 }
+
 Widget story() {
   return SizedBox(
     height: Get.height * 0.15,
@@ -410,5 +430,3 @@ Widget story() {
     ),
   );
 }
-
-

@@ -11,6 +11,7 @@ class AddScreen extends StatelessWidget {
     Get.put(AddController());
     return Scaffold(
       appBar: addPostAppBar,
+      body: addPostBody(),
     );
   }
 }
