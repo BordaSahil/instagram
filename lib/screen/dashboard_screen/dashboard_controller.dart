@@ -26,10 +26,12 @@ class DashboardController extends GetxController {
       Color(0xfffbad50),
       Color(0xffcd486b),
     ],
-  ).createShader(const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0));
+  ).createShader(
+    const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0),
+  );
 
   void onTapNavigation(int index) {
     currentIndex = index;
-    update(["bottomNavigation"]);
+    update(["bottomNavigationBar"]);
   }
 }

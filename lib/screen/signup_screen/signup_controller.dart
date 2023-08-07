@@ -34,6 +34,7 @@ class SignupController extends GetxController {
 
   ///---------------------------------user name------------------------///
   String? userNameError;
+
   void signupUserNameValidation(String? value) {
     if (value == null || value.isEmpty) {
       userNameError = "Please Enter userName";
@@ -47,6 +48,7 @@ class SignupController extends GetxController {
 
   ///----------------------------password--------------------------------------///
   String? passwordError;
+
   void signupPasswordValidation(String? value) {
     if (value == null || value.isEmpty) {
       passwordError = "Please Enter Password";
@@ -60,6 +62,7 @@ class SignupController extends GetxController {
 
   ///--------------------------------------mobile---------------------------------///
   String? mobileError;
+
   void signupMobile(String? value) {
     if (value == null || value.isEmpty) {
       mobileError = "Please Enter Mobile number";
@@ -73,6 +76,7 @@ class SignupController extends GetxController {
 
   ///-----------------------------------email---------------------------------------------------------///
   String? emailError;
+
   void signupEmailValidation(String? value) {
     if (value == null || value.isEmpty) {
       emailError = 'Please Enter Email';

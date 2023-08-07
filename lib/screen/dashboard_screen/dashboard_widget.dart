@@ -5,7 +5,7 @@ import 'package:instagram/screen/dashboard_screen/dashboard_controller.dart';
 import 'package:instagram/utils/color_res.dart';
 
 Widget dashboardBody = GetBuilder<DashboardController>(
-  id: "bottomNavigation",
+  id: "bottomNavigationBar",
   builder: (controller) => controller.screenList[controller.currentIndex],
 );
 

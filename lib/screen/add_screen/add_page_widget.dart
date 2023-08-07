@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram/common/common_button.dart';
 import 'package:instagram/screen/add_screen/add_controller.dart';
 import 'package:instagram/utils/string_res.dart';
 
@@ -39,64 +40,60 @@ AppBar addPostAppBar = AppBar(
 Widget addPostBody() {
   return Center(
     child: GetBuilder<AddController>(
-      id: "dialogBox",
-      builder: (controller) {
-        return ElevatedButton(
-            onPressed: () {
-              controller.dialogBox();
-            },
-            child: const Text("Choose Image"));
-      },
+        id: "dialogBox",
+        builder: (controller) {
+          return ElevatedButton(
+              onPressed: () {
+                controller.dialogBox();
+              },
+              child: const Text("Choose Image"));
+        }),
+  );
+}
+
+Widget imagePick() {
+  return GetBuilder<AddController>(
+    id: "imageGallery",
+    builder: (controller) => Padding(
+      padding: const EdgeInsets.only(bottom: 40),
+      child: InkWell(
+        onTap: () => controller.imagePickerGallery(),
+        child: CircleAvatar(
+          radius: 60,
+          child: controller.image != null
+              ? CircleAvatar(
+                  radius: 60,
+                  backgroundImage: FileImage(controller.image!),
+                )
+              : null,
+        ),
+      ),
     ),
   );
 }
 
-// Widget imagePick() {
-//   return GetBuilder<AddController>(
-//     id: "imageGallery",
-//     builder: (controller) =>
-//         Padding(
-//           padding: const EdgeInsets.only(bottom: 40),
-//           child: InkWell(
-//             onTap: () => controller.imagePickerGallery(),
-//             child: CircleAvatar(
-//               radius: 60,
-//               child: controller.image != null
-//                   ? CircleAvatar(
-//                 radius: 60,
-//                 backgroundImage: FileImage(controller.image!),
-//               )
-//                   : null,
-//             ),
-//           ),
-//         ),
-//   );
-// }
+Widget addNewPostGallery() {
+  return GetBuilder<AddController>(
+    id: 'Gallery',
+    builder: (controller) => ButtonWidget(
+      minHeight: 45,
+      minWidth: 150,
+      text: 'Gallery',
+      color: Colors.white,
+      onPressed: () => controller.imagePickerGallery(),
+    ),
+  );
+}
 
-// Widget addNewPostGallery() {
-//   return GetBuilder<AddController>(
-//     id: 'Gallery',
-//     builder: (controller) =>
-//         ButtonWidget(
-//           minHeight: 45,
-//           minWidth: 150,
-//           text: 'Gallery',
-//           color: Colors.white,
-//           onPressed: () => controller.imagePickerGallery(),
-//         ),
-//   );
-// }
-
-// Widget addNewPostCamera() {
-//   return GetBuilder<AddController>(
-//     id: 'Camera',
-//     builder: (controller) =>
-//         ButtonWidget(
-//           minHeight: 45,
-//           minWidth: 150,
-//           text: 'Camera',
-//           color: Colors.white,
-//           onPressed: () => controller.imagePickerCamera(),
-//         ),
-//   );
-// }
+Widget addNewPostCamera() {
+  return GetBuilder<AddController>(
+    id: 'Camera',
+    builder: (controller) => ButtonWidget(
+      minHeight: 45,
+      minWidth: 150,
+      text: 'Camera',
+      color: Colors.white,
+      onPressed: () => controller.imagePickerCamera(),
+    ),
+  );
+}
