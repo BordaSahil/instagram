@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram/screen/add_screen/add_page.dart';
-import 'package:instagram/screen/add_screen/add_page_widget.dart';
 import 'package:instagram/screen/favorite_screen/favorite_page.dart';
 import 'package:instagram/screen/home_screen/home_page.dart';
 import 'package:instagram/screen/profile_screen/profile_page.dart';
@@ -27,17 +26,12 @@ class DashboardController extends GetxController {
       Color(0xfffbad50),
       Color(0xffcd486b),
     ],
-  ).createShader(const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0));
+  ).createShader(
+    const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0),
+  );
 
   void onTapNavigation(int index) {
     currentIndex = index;
-    update(["bottomNavigation"]);
+    update(["bottomNavigationBar"]);
   }
-
-  void addNewPhoto(){
-    addNewPostGallery();
-    addNewPostCamera();
-    update(['bottomNavigation']);
-  }
-
 }

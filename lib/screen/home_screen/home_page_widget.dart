@@ -1,13 +1,13 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:instagram/common/common_size_box.dart';
 import 'package:instagram/screen/home_screen/home_controller.dart';
 import 'package:instagram/utils/asset_res.dart';
 import 'package:instagram/utils/color_res.dart';
 import 'package:instagram/utils/string_res.dart';
-import 'package:readmore/readmore.dart';
 import 'package:reels_viewer/reels_viewer.dart';
 import 'package:search_bar_animated/search_bar_animated.dart';
 
@@ -256,7 +256,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
       GetBuilder<HomeController>(
         builder: (controller) {
           return GestureDetector(
-            onTap: () => controller.openBottomSheet(),
+            onTap: () {},
             child: IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -270,7 +270,7 @@ Widget likeRow(void Function()? onPressed, Icon iconData,
       GetBuilder<HomeController>(
         builder: (controller) {
           return GestureDetector(
-            onTap: () => controller.openBottomSheetHome(),
+            onTap: () => {},
             child: IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -360,6 +360,7 @@ Widget profileStory() {
     ]),
   );
 }
+
 Widget story() {
   return SizedBox(
     height: Get.height * 0.15,
@@ -410,5 +411,3 @@ Widget story() {
     ),
   );
 }
-
-
