@@ -18,7 +18,7 @@ class DashboardController extends GetxController {
   ];
 
   final Shader linearGradient = const RadialGradient(
-    colors: <Color>[
+    colors: [
       Color(0xff8a3ab9),
       Color(0xffe95950),
       Color(0xffbc2a8d),

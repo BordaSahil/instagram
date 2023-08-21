@@ -43,7 +43,6 @@ dependencies:
   lottie:
   animated_text_kit: ^4.2.2
   reels_viewer:
-  card_swiper: 3.0.1
   flashy_tab_bar2: 0.0.6
   simple_gradient_text: 1.2.4
 
